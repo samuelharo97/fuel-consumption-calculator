@@ -53,6 +53,7 @@ export default function App() {
     const trucksExist: VehicleData[] = loadFromLocalStorage('@Trucks');
 
     trucksExist.length > 0 ? setTrucks(trucksExist) : setTrucks([...vehicles]);
+    saveToLocalStorage('@Trucks', vehicles);
   }, []);
 
   const deleteVehicle = (id: string) => {
@@ -61,6 +62,29 @@ export default function App() {
     saveToLocalStorage('@Trucks', vehicles);
     setTrucks(vehicles);
   };
+
+  // const handleEdit = (vehicle: VehicleData) => {
+  //   setTrucks((prevData: VehicleData[]) => {
+  //     const updatedData = prevData.map(data => {
+  //       if (data.id === vehicle.id) {
+  //         console.log(vehicle.id);
+  //         return {
+  //           ...data,
+  //           licensePlate: vehicle.licensePlate,
+  //           vehicleModel: vehicle.vehicleModel,
+  //           tankCapacity: vehicle.tankCapacity,
+  //           maxLoad: vehicle.maxLoad,
+  //           averageConsumption: vehicle.averageConsumption,
+  //           distanceTravelled: vehicle.distanceTravelled,
+  //           totalConsumption: vehicle.totalConsumption
+  //         };
+  //       } else {
+  //         return data;
+  //       }
+  //     });
+  //     return updatedData;
+  //   });
+  // };
 
   return (
     <>

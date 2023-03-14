@@ -2,6 +2,8 @@ import { useFormik } from 'formik';
 import { FlexDiv, FormContainer, SubmitButton } from './styles';
 import { Autocomplete, TextField } from '@mui/material';
 import { TruckBrands } from '../../utils/trucks';
+import { VehicleData } from '../../types/vehicle-data.type';
+import { useEffect } from 'react';
 
 interface VehicleFormValues {
   licensePlate: string;
@@ -21,7 +23,11 @@ const initialValues: VehicleFormValues = {
   distanceTravelled: 0
 };
 
-export const Form = () => {
+interface FormOptionalProps {
+  data?: VehicleData;
+}
+
+export const Form: React.FC<FormOptionalProps> = ({ data }) => {
   const formik = useFormik({
     initialValues,
     onSubmit: values => {
@@ -55,6 +61,17 @@ export const Form = () => {
       return errors;
     }
   });
+
+  useEffect(() => {
+    if (data) {
+      formik.setFieldValue('averageConsumption', data.averageConsumption);
+      formik.setFieldValue('distanceTravelled', data.distanceTravelled);
+      formik.setFieldValue('licensePlate', data.licensePlate);
+      formik.setFieldValue('maxLoad', data.maxLoad);
+      formik.setFieldValue('tankCapacity', data.tankCapacity);
+      formik.setFieldValue('vehicleModel', data.vehicleModel);
+    }
+  }, []);
 
   const resetForm = () => {
     formik.setFieldValue('averageConsumption', 0);
@@ -144,19 +161,25 @@ export const Form = () => {
         }
       />
 
-      <FlexDiv>
-        <SubmitButton
-          variant="contained"
-          onClick={() => resetForm()}
-          color="warning"
-          type="button"
-        >
-          Limpar
-        </SubmitButton>
+      {data ? (
         <SubmitButton variant="contained" color="primary" type="submit">
-          Calcular
+          Salvar
         </SubmitButton>
-      </FlexDiv>
+      ) : (
+        <FlexDiv>
+          <SubmitButton
+            variant="contained"
+            onClick={() => resetForm()}
+            color="warning"
+            type="button"
+          >
+            Limpar
+          </SubmitButton>
+          <SubmitButton variant="contained" color="primary" type="submit">
+            Calcular
+          </SubmitButton>
+        </FlexDiv>
+      )}
     </FormContainer>
   );
 };
