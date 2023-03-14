@@ -6,7 +6,10 @@ import { HeaderSidebar } from './components/Header';
 import { VehicleTable } from './components/VehicleTable';
 import { useEffect, useState } from 'react';
 import { VehicleData } from './types/vehicle-data.type';
-import { loadFromLocalStorage } from './utils/local-storage';
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage
+} from './utils/local-storage';
 
 // function Copyright() {
 //   return (
@@ -50,7 +53,14 @@ export default function App() {
     const trucksExist: VehicleData[] = loadFromLocalStorage('@Trucks');
 
     trucksExist.length > 0 ? setTrucks(trucksExist) : setTrucks([...vehicles]);
-  });
+  }, []);
+
+  const deleteVehicle = (id: string) => {
+    console.log(id);
+    const vehicles = trucks.filter(vehicle => vehicle.id != id);
+    saveToLocalStorage('@Trucks', vehicles);
+    setTrucks(vehicles);
+  };
 
   return (
     <>
@@ -59,7 +69,7 @@ export default function App() {
         <Box sx={{ my: 24 }}>
           <Typography variant="h1" component="h1" gutterBottom></Typography>
         </Box>
-        <VehicleTable data={trucks} />
+        <VehicleTable handleDeleteTruck={deleteVehicle} data={trucks} />
       </Container>
     </>
   );

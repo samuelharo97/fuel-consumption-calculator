@@ -13,16 +13,13 @@ import { VehicleData } from '../../types/vehicle-data.type';
 
 interface TableProps {
   data: VehicleData[];
+  handleDeleteTruck: (id: string) => void;
 }
 
-export const VehicleTable: React.FC<TableProps> = ({ data }) => {
-  const deleteVehicle = (id: string) => {
-    console.log(id);
-    const vehicles = data.filter(vehicle => vehicle.id != id);
-
-    localStorage.setItem('@Trucks', JSON.stringify(vehicles));
-  };
-
+export const VehicleTable: React.FC<TableProps> = ({
+  data,
+  handleDeleteTruck
+}) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -48,7 +45,9 @@ export const VehicleTable: React.FC<TableProps> = ({ data }) => {
               <TableCell>{vehicle.distanceTravelled}</TableCell>
               <TableCell>{vehicle.totalConsumption}</TableCell>
               <TableCell>
-                <DeleteTooltip removeRow={() => deleteVehicle(vehicle.id)} />
+                <DeleteTooltip
+                  removeRow={() => handleDeleteTruck(vehicle.id)}
+                />
               </TableCell>
             </StyledTableRow>
           ))}
