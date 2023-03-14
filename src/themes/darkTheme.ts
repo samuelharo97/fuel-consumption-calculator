@@ -1,6 +1,11 @@
-import { createTheme } from '@mui/material';
+import { Theme, createTheme } from '@mui/material';
+import { DefaultTheme } from 'styled-components';
 
-export const darkTheme = createTheme({
+declare module 'styled-components' {
+  export interface DefaultTheme extends Theme {}
+}
+
+export const darkTheme: DefaultTheme = createTheme({
   palette: {
     primary: {
       light: '#00a335',
@@ -37,6 +42,9 @@ export const darkTheme = createTheme({
     common: {
       white: '#F4EDE8',
       black: '#000000'
+    },
+    background: {
+      default: '#BBCAD2'
     }
   }
 });

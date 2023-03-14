@@ -1,6 +1,11 @@
-import { createTheme } from '@mui/material';
+import { Theme, createTheme } from '@mui/material';
+import { DefaultTheme } from 'styled-components';
 
-export const lightTheme = createTheme({
+declare module 'styled-components' {
+  export interface DefaultTheme extends Theme {}
+}
+
+export const lightTheme: DefaultTheme = createTheme({
   palette: {
     primary: {
       light: '#87c984',

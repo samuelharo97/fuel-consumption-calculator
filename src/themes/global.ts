@@ -25,6 +25,7 @@ export const GlobalTheme = createGlobalStyle`
 }
 
 body {
+  background-color: ${({ theme }) => theme.palette.background.default};
   height: 100vh;
   width: 100%;
   min-width: 480px;
