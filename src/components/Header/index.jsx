@@ -14,10 +14,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CalculateIcon from '@mui/icons-material/CalculateTwoTone';
-import TableIcon from '@mui/icons-material/Analytics';
-import MailIcon from '@mui/icons-material/Mail';
+import TableIcon from '@mui/icons-material/TableChart';
 import SettingsIcon from '@mui/icons-material/Settings';
+import HomepageIcon from '@mui/icons-material/FireTruckOutlined';
+import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
 import { AppBar, Drawer, DrawerHeader, StyledToolbar } from './styles';
+import { Link } from 'react-router-dom';
 
 export const HeaderSidebar = () => {
   const theme = useTheme();
@@ -33,7 +35,6 @@ export const HeaderSidebar = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <AppBar position="fixed" open={open}>
         <StyledToolbar>
           <Box>
@@ -44,7 +45,7 @@ export const HeaderSidebar = () => {
               edge="start"
               sx={{
                 marginRight: 5,
-                ...(open && { display: 'none' })
+                ...(open && { display: 'none' }),
               }}
             >
               <MenuIcon />
@@ -63,53 +64,119 @@ export const HeaderSidebar = () => {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Calculate', 'Manage'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center'
-                  }}
-                >
-                  {index === 0 ? <CalculateIcon /> : <TableIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
+              component={Link}
+              to="/"
               sx={{
                 minHeight: 48,
-                justifyContent: 'end',
-                px: 2.5
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
-                  justifyContent: 'end'
+                  justifyContent: 'center',
+                }}
+              >
+                <HomepageIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Página inicial'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
+              to="/calculate"
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <CalculateIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Calcular consumo'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
+              to="/table"
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <TableIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Tabela'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
+              to="/analytics"
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <AnalyticsIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Estatísticas'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+
+        <Divider />
+
+        <List>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: 'end',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'end',
                 }}
               >
                 <SettingsIcon />

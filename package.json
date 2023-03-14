@@ -1,48 +1,33 @@
 {
   "name": "fuel-consumption-calculator",
-  "version": "1.0.0",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.11",
-    "@mui/lab": "latest",
-    "@mui/material": "latest",
-    "@mui/styled-engine-sc": "latest",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/user-event": "latest",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "latest",
+    "@mui/material": "^5.11.12",
+    "@mui/styled-engine-sc": "^5.11.11",
+    "@types/node": "^18.15.2",
     "formik": "^2.2.9",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest",
-    "styled-components": "latest"
-  },
-  "scripts": {
-    "tsc": "./node_modules/.bin/tsc",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-router-dom": "^6.9.0",
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
-    "@craco/craco": "latest",
-    "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/styled-components": "^5.1.26",
-    "craco-alias": "^3.0.1",
-    "typescript": "latest"
+    "@vitejs/plugin-react": "latest",
+    "eslint": "^8.36.0",
+    "typescript": "latest",
+    "vite": "latest"
   }
 }

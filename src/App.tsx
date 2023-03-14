@@ -1,27 +1,7 @@
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Form } from './components/Form';
-import { HeaderSidebar } from './components/Header';
-import { VehicleTable } from './components/VehicleTable';
-import { useEffect, useState } from 'react';
-import { VehicleData } from './types/vehicle-data.type';
-import {
-  loadFromLocalStorage,
-  saveToLocalStorage
-} from './utils/local-storage';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}.
-//     </Typography>
-//   );
-// }
+import { HeaderSidebar as Header, VehicleTable } from './components';
+import './App.css';
+import { Container } from '@mui/material';
+import { AppRoutes } from './routes/app-routes';
 
 const vehicles = [
   {
@@ -32,7 +12,7 @@ const vehicles = [
     maxLoad: 1000,
     averageConsumption: 10,
     distanceTravelled: 500,
-    totalConsumption: 50
+    totalConsumption: 50,
   },
   {
     id: '23rpdś',
@@ -42,36 +22,16 @@ const vehicles = [
     maxLoad: 800,
     averageConsumption: 8,
     distanceTravelled: 400,
-    totalConsumption: 32
-  }
+    totalConsumption: 32,
+  },
 ];
-
-export default function App() {
-  const [trucks, setTrucks] = useState<VehicleData[]>([]);
-
-  useEffect(() => {
-    const trucksExist: VehicleData[] = loadFromLocalStorage('@Trucks');
-
-    trucksExist.length > 0 ? setTrucks(trucksExist) : setTrucks([...vehicles]);
-    saveToLocalStorage('@Trucks', vehicles);
-  }, []);
-
-  const deleteVehicle = (id: string) => {
-    console.log(id);
-    const vehicles = trucks.filter(vehicle => vehicle.id != id);
-    saveToLocalStorage('@Trucks', vehicles);
-    setTrucks(vehicles);
-  };
-
+function App() {
   return (
-    <>
-      <HeaderSidebar />
-      <Container maxWidth="lg">
-        <Box sx={{ my: 24 }}>
-          <Typography variant="h1" component="h1" gutterBottom></Typography>
-        </Box>
-        <VehicleTable handleDeleteTruck={deleteVehicle} data={trucks} />
-      </Container>
-    </>
+    <Container>
+      <Header />
+      {<AppRoutes />}
+    </Container>
   );
 }
+
+export default App;

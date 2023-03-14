@@ -1,5 +1,4 @@
-import { TableRow, TableCell } from '@mui/material';
-import styled from 'styled-components';
+import { TableRow, TableCell, styled } from '@mui/material';
 
 export const StyledTableRow = styled(TableRow)`
   background-color: ${({ theme }) => theme.palette.common.white};

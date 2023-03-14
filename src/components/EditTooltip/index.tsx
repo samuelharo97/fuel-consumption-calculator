@@ -1,13 +1,11 @@
+import { Tooltip, IconButton } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 
 interface EditProps {
   editRow: () => void;
 }
 
 export const EditTooltip: React.FC<EditProps> = ({ editRow }) => {
-  
   return (
     <Tooltip onClick={editRow} title="Edit">
       <IconButton>
