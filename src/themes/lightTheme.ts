@@ -43,5 +43,6 @@ export const lightTheme: DefaultTheme = createTheme({
       white: '#D7DBDD',
       black: '#495057'
     }
-  }
+  },
+  transitions: {}
 });

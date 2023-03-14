@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Box } from '@mui/system';
-import { TextField, Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 export const StyledDiv = styled(Box)({
   background: '#fff',
@@ -13,22 +13,26 @@ export const FormContainer = styled('form')({
   display: 'flex',
   flexDirection: 'column',
   maxWidth: '400px',
-  margin: '0 auto'
+  margin: '0 auto',
+  gap: '20px'
 });
 
-export const StyledDive = styled.div`          <~ WORKING
-  background: ${({ theme }) => theme.palette.primary.main};
+export const FlexDiv = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
 `;
+
+// export const StyledDive = styled.div`          <~ WORKING
+//   background: ${({ theme }) => theme.palette.primary.main};
+// `;
 
 export const FormTitle = styled('h2')({
   marginBottom: '20px'
 });
 
-export const FormField = styled(TextField)({
-  marginBottom: '20px'
-});
-
 export const SubmitButton = styled(Button)({
   marginTop: '20px',
+  width: '120px',
   alignSelf: 'flex-end'
 });

@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Form } from './components/Form';
+import { HeaderSidebar } from './components/Header';
 
 // function Copyright() {
 //   return (
@@ -16,17 +17,37 @@ import { Form } from './components/Form';
 //   );
 // }
 
+const vehicles = [
+  {
+    licensePlate: 'ABC123',
+    vehicleModel: 'Honda Civic',
+    tankCapacity: 50,
+    maxLoad: 1000,
+    averageConsumption: 10,
+    distanceTravelled: 500,
+    consumption: 50
+  },
+  {
+    licensePlate: 'DEF456',
+    vehicleModel: 'Toyota Corolla',
+    tankCapacity: 40,
+    maxLoad: 800,
+    averageConsumption: 8,
+    distanceTravelled: 400,
+    consumption: 32
+  }
+];
+
 export default function App() {
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Material UI Create React App example with styled-components in
-          TypeScript
-        </Typography>
-        {/* <Copyright /> */}
-      </Box>
-      <Form></Form>
-    </Container>
+    <>
+      <HeaderSidebar />
+      <Container maxWidth="lg">
+        <Box sx={{ my: 24 }}>
+          <Typography variant="h1" component="h1" gutterBottom></Typography>
+        </Box>
+        <Form></Form>
+      </Container>
+    </>
   );
 }

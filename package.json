@@ -1,8 +1,10 @@
 {
-  "name": "fuel-consume-calculator",
+  "name": "fuel-consumption-calculator",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
     "@mui/lab": "latest",
     "@mui/material": "latest",
     "@mui/styled-engine-sc": "latest",

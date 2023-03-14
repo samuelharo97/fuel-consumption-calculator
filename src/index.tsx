@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App';
-import { ThemeProvider } from '@mui/material';
+import {
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider
+} from '@mui/material';
 import { GlobalTheme, darkTheme, lightTheme } from './themes';
 
 ReactDOM.render(

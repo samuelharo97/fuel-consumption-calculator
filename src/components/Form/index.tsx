@@ -1,5 +1,7 @@
 import { useFormik } from 'formik';
-import { FormContainer, FormField, StyledDiv, SubmitButton } from './styles';
+import { FlexDiv, FormContainer, SubmitButton } from './styles';
+import { Autocomplete, TextField } from '@mui/material';
+import { TruckBrands } from '../../utils/trucks';
 
 interface VehicleFormValues {
   licensePlate: string;
@@ -54,9 +56,18 @@ export const Form = () => {
     }
   });
 
+  const resetForm = () => {
+    formik.setFieldValue('averageConsumption', 0);
+    formik.setFieldValue('distanceTravelled', 0);
+    formik.setFieldValue('maxLoad', 0);
+    formik.setFieldValue('tankCapacity', 0);
+    formik.setFieldValue('licensePlate', '');
+    formik.setFieldValue('vehicleModel', '');
+  };
+
   return (
     <FormContainer onSubmit={formik.handleSubmit}>
-      <FormField
+      <TextField
         id="licensePlate"
         label="Placa"
         variant="outlined"
@@ -66,17 +77,30 @@ export const Form = () => {
         )}
         helperText={formik.touched.licensePlate && formik.errors.licensePlate}
       />
-      <FormField
+      <Autocomplete
         id="vehicleModel"
-        label="Modelo"
-        variant="outlined"
-        {...formik.getFieldProps('vehicleModel')}
-        error={Boolean(
-          formik.touched.vehicleModel && formik.errors.vehicleModel
+        options={TruckBrands}
+        freeSolo={true}
+        getOptionLabel={option => option}
+        value={formik.values.vehicleModel}
+        onChange={(event, value) =>
+          formik.setFieldValue('vehicleModel', value || '')
+        }
+        renderInput={params => (
+          <TextField
+            {...params}
+            label="Modelo"
+            error={Boolean(
+              formik.touched.vehicleModel && formik.errors.vehicleModel
+            )}
+            helperText={
+              formik.touched.vehicleModel && formik.errors.vehicleModel
+            }
+          />
         )}
-        helperText={formik.touched.vehicleModel && formik.errors.vehicleModel}
       />
-      <FormField
+
+      <TextField
         id="tankCapacity"
         label="Capacidade do Tanque"
         variant="outlined"
@@ -86,7 +110,7 @@ export const Form = () => {
         )}
         helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
       />
-      <FormField
+      <TextField
         id="maxLoad"
         label="Carga máxima"
         variant="outlined"
@@ -94,7 +118,7 @@ export const Form = () => {
         error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
         helperText={formik.touched.maxLoad && formik.errors.maxLoad}
       />
-      <FormField
+      <TextField
         id="averageConsumption"
         label="Consumo médio"
         variant="outlined"
@@ -107,7 +131,7 @@ export const Form = () => {
           formik.touched.averageConsumption && formik.errors.averageConsumption
         }
       />
-      <FormField
+      <TextField
         id="distanceTravelled"
         label="Distância percorrida"
         variant="outlined"
@@ -120,9 +144,19 @@ export const Form = () => {
         }
       />
 
-      <SubmitButton variant="contained" color="primary" type="submit">
-        Calcular
-      </SubmitButton>
+      <FlexDiv>
+        <SubmitButton
+          variant="contained"
+          onClick={() => resetForm()}
+          color="warning"
+          type="button"
+        >
+          Limpar
+        </SubmitButton>
+        <SubmitButton variant="contained" color="primary" type="submit">
+          Calcular
+        </SubmitButton>
+      </FlexDiv>
     </FormContainer>
   );
 };
