@@ -1,10 +1,8 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import type React from 'react';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react';
-import { VehicleData } from '../../types/vehicle-data.type';
 import { Form } from '../Form';
+import type { VehicleData } from '../../types';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -15,7 +13,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4
+  p: 4,
 };
 
 interface EditModalProps {
@@ -28,9 +26,8 @@ interface EditModalProps {
 export const EditModal: React.FC<EditModalProps> = ({
   isOpen,
   handleClose,
-  vehicle
+  vehicle,
 }) => {
-  console.log(vehicle);
   return (
     <div>
       <Modal

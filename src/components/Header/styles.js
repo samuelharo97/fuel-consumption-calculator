@@ -1,6 +1,6 @@
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { Toolbar } from '@mui/material';
 
 const drawerWidth = 240;

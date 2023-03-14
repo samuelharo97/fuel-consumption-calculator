@@ -15,7 +15,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CalculateIcon from '@mui/icons-material/CalculateTwoTone';
 import TableIcon from '@mui/icons-material/Analytics';
-import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { AppBar, Drawer, DrawerHeader, StyledToolbar } from './styles';
 
@@ -44,7 +43,7 @@ export const HeaderSidebar = () => {
               edge="start"
               sx={{
                 marginRight: 5,
-                ...(open && { display: 'none' })
+                ...(open && { display: 'none' }),
               }}
             >
               <MenuIcon />
@@ -63,11 +62,7 @@ export const HeaderSidebar = () => {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -78,14 +73,14 @@ export const HeaderSidebar = () => {
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
-                  px: 2.5
+                  px: 2.5,
                 }}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
                   }}
                 >
                   {index === 0 ? <CalculateIcon /> : <TableIcon />}
@@ -102,14 +97,14 @@ export const HeaderSidebar = () => {
               sx={{
                 minHeight: 48,
                 justifyContent: 'end',
-                px: 2.5
+                px: 2.5,
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
-                  justifyContent: 'end'
+                  justifyContent: 'end',
                 }}
               >
                 <SettingsIcon />

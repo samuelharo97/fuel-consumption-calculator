@@ -5,13 +5,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
 } from '@mui/material';
 import { TableHeaderCell, StyledTableRow } from './styles';
 import { DeleteTooltip } from '../DeleteTooltip';
-import { VehicleData } from '../../types/vehicle-data.type';
+import type { VehicleData } from '../../types/vehicle-data.type';
 import { EditTooltip } from '../EditTooltip';
 import { EditModal } from '../EditModal';
+import type React from 'react';
 import { useState } from 'react';
 import { loadFromLocalStorage } from '../../utils/local-storage';
 
@@ -20,48 +21,29 @@ interface TableProps {
   handleDeleteTruck: (id: string) => void;
 }
 
-export const VehicleTable: React.FC<TableProps> = ({
-  data,
-  handleDeleteTruck
-}) => {
-  // const handleEditTruck = (vehicle: VehicleData) => {
-  //   const editableVehicle: VehicleData = {
-  //     id: vehicle.id,
-  //     licensePlate: vehicle.licensePlate,
-  //     vehicleModel: vehicle.vehicleModel,
-  //     tankCapacity: vehicle.tankCapacity,
-  //     maxLoad: vehicle.maxLoad,
-  //     averageConsumption: vehicle.averageConsumption,
-  //     distanceTravelled: vehicle.distanceTravelled,
-  //     totalConsumption: vehicle.totalConsumption
-  //   };
-  //   onEdit(editableVehicle);
-  // };
+export const VehicleTable: React.FC<TableProps> = ({ data, handleDeleteTruck }) => {
   const [open, setOpen] = useState(false);
   const [vehicle, setVehicle] = useState<VehicleData>();
 
-  const handleOpen = (id: string) => {
+  const handleOpen = (id: string): void => {
     const allTrucks: VehicleData[] = loadFromLocalStorage('@Trucks');
 
-    console.log(allTrucks);
-    const truckToEdit = allTrucks.find(vehicle => vehicle.id === id);
+    const truckToEdit = allTrucks.find((vehicle) => vehicle.id === id);
 
-    if (!truckToEdit) {
+    if (truckToEdit == null) {
       throw new Error('Truck not found');
     }
 
     setVehicle(truckToEdit);
     setOpen(true);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = (): void => {
+    setOpen(false);
+  };
 
   return (
     <>
-      <EditModal
-        vehicle={vehicle}
-        handleClose={handleClose}
-        isOpen={open}
-      ></EditModal>
+      <EditModal vehicle={vehicle} handleClose={handleClose} isOpen={open}></EditModal>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -76,7 +58,7 @@ export const VehicleTable: React.FC<TableProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(vehicle => (
+            {data.map((vehicle) => (
               <StyledTableRow key={vehicle.id}>
                 <TableCell>{vehicle.licensePlate}</TableCell>
                 <TableCell>{vehicle.vehicleModel}</TableCell>
@@ -86,11 +68,17 @@ export const VehicleTable: React.FC<TableProps> = ({
                 <TableCell>{vehicle.distanceTravelled}</TableCell>
                 <TableCell>{vehicle.totalConsumption}</TableCell>
                 <TableCell>
-                  <EditTooltip editRow={() => handleOpen(vehicle.id)} />
+                  <EditTooltip
+                    editRow={() => {
+                      handleOpen(vehicle.id);
+                    }}
+                  />
                 </TableCell>
                 <TableCell>
                   <DeleteTooltip
-                    removeRow={() => handleDeleteTruck(vehicle.id)}
+                    removeRow={() => {
+                      handleDeleteTruck(vehicle.id);
+                    }}
                   />
                 </TableCell>
               </StyledTableRow>

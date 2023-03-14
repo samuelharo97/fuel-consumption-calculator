@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { useFormik } from 'formik';
 import { FlexDiv, FormContainer, SubmitButton } from './styles';
 import { Autocomplete, TextField } from '@mui/material';
 import { TruckBrands } from '../../utils/trucks';
-import { VehicleData } from '../../types/vehicle-data.type';
+import type { VehicleData } from '../../types/vehicle-data.type';
 import { useEffect } from 'react';
-import {
-  loadFromLocalStorage,
-  saveToLocalStorage
-} from '../../utils/local-storage';
+import type React from 'react';
+import { loadFromLocalStorage, saveToLocalStorage } from '../../utils/local-storage';
 
 interface VehicleFormValues {
   licensePlate: string;
@@ -24,29 +25,30 @@ const initialValues: VehicleFormValues = {
   tankCapacity: 0,
   maxLoad: 0,
   averageConsumption: 0,
-  distanceTravelled: 0
+  distanceTravelled: 0,
 };
 
 interface FormOptionalProps {
   data?: VehicleData;
+  handleEdit?: () => void;
 }
 
 export const Form: React.FC<FormOptionalProps> = ({ data }) => {
   const formik = useFormik({
     initialValues,
-    onSubmit: values => {
+    onSubmit: (values) => {
       console.log(values);
       // Calculate average fuel consumption per ton transported
       // and add the calculation result to the history list.
 
-      if (!data) {
+      if (data == null) {
         // createVehicle(values) //
       } else {
         handleEdit(values, data.id);
       }
     },
 
-    validate: values => {
+    validate: (values) => {
       const errors: Partial<VehicleFormValues> = {};
       if (!values.licensePlate) {
         errors.licensePlate = 'License Plate is required';
@@ -55,8 +57,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         errors.vehicleModel = 'Model is required';
       }
       if (values.tankCapacity <= 0) {
-        errors.tankCapacity =
-          'Tank Capacity must be greater than 0' as unknown as number;
+        errors.tankCapacity = 'Tank Capacity must be greater than 0' as unknown as number;
       }
       if (values.maxLoad <= 0) {
         errors.maxLoad = 'Max Load must be greater than 0' as unknown as number;
@@ -66,17 +67,16 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           'Average Consumption must be greater than 0' as unknown as number;
       }
       if (values.distanceTravelled <= 0) {
-        errors.distanceTravelled =
-          'Distance Traveled must be greater than 0' as unknown as number;
+        errors.distanceTravelled = 'Distance Traveled must be greater than 0' as unknown as number;
       }
       return errors;
-    }
+    },
   });
 
-  const handleEdit = (values: VehicleFormValues, id: string) => {
+  const handleEdit = (values: VehicleFormValues, id: string): void => {
     const prevData: VehicleData[] = loadFromLocalStorage('@Trucks');
 
-    const updatedData = prevData.map(data => {
+    const updatedData = prevData.map((data) => {
       if (data.id === id) {
         // const total = calculateConsumption(values)
         return {
@@ -86,7 +86,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           tankCapacity: values.tankCapacity,
           maxLoad: values.maxLoad,
           averageConsumption: values.averageConsumption,
-          distanceTravelled: values.distanceTravelled
+          distanceTravelled: values.distanceTravelled,
           // totalConsumption: total
         };
       } else {
@@ -97,7 +97,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data != null) {
       formik.setFieldValue('averageConsumption', data.averageConsumption);
       formik.setFieldValue('distanceTravelled', data.distanceTravelled);
       formik.setFieldValue('licensePlate', data.licensePlate);
@@ -107,7 +107,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
     }
   }, []);
 
-  const resetForm = () => {
+  const resetForm = async (): Promise<void> => {
     formik.setFieldValue('averageConsumption', 0);
     formik.setFieldValue('distanceTravelled', 0);
     formik.setFieldValue('maxLoad', 0);
@@ -123,30 +123,22 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         label="Placa"
         variant="outlined"
         {...formik.getFieldProps('licensePlate')}
-        error={Boolean(
-          formik.touched.licensePlate && formik.errors.licensePlate
-        )}
+        error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
         helperText={formik.touched.licensePlate && formik.errors.licensePlate}
       />
       <Autocomplete
         id="vehicleModel"
         options={TruckBrands}
         freeSolo={true}
-        getOptionLabel={option => option}
+        getOptionLabel={(option) => option}
         value={formik.values.vehicleModel}
-        onChange={(event, value) =>
-          formik.setFieldValue('vehicleModel', value || '')
-        }
-        renderInput={params => (
+        onChange={async (_event, value) => await formik.setFieldValue('vehicleModel', value ?? '')}
+        renderInput={(params) => (
           <TextField
             {...params}
             label="Modelo"
-            error={Boolean(
-              formik.touched.vehicleModel && formik.errors.vehicleModel
-            )}
-            helperText={
-              formik.touched.vehicleModel && formik.errors.vehicleModel
-            }
+            error={Boolean(formik.touched.vehicleModel && formik.errors.vehicleModel)}
+            helperText={formik.touched.vehicleModel && formik.errors.vehicleModel}
           />
         )}
       />
@@ -156,9 +148,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         label="Capacidade do Tanque"
         variant="outlined"
         {...formik.getFieldProps('tankCapacity')}
-        error={Boolean(
-          formik.touched.tankCapacity && formik.errors.tankCapacity
-        )}
+        error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
         helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
       />
       <TextField
@@ -175,27 +165,19 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         variant="outlined"
         type="number"
         {...formik.getFieldProps('averageConsumption')}
-        error={Boolean(
-          formik.touched.averageConsumption && formik.errors.averageConsumption
-        )}
-        helperText={
-          formik.touched.averageConsumption && formik.errors.averageConsumption
-        }
+        error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
+        helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
       />
       <TextField
         id="distanceTravelled"
         label="Distância percorrida"
         variant="outlined"
         {...formik.getFieldProps('distanceTravelled')}
-        error={Boolean(
-          formik.touched.distanceTravelled && formik.errors.distanceTravelled
-        )}
-        helperText={
-          formik.touched.distanceTravelled && formik.errors.distanceTravelled
-        }
+        error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
+        helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}
       />
 
-      {data ? (
+      {data != null ? (
         <SubmitButton variant="contained" color="primary" type="submit">
           Salvar
         </SubmitButton>
@@ -203,7 +185,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         <FlexDiv>
           <SubmitButton
             variant="contained"
-            onClick={() => resetForm()}
+            onClick={() => {
+              resetForm();
+            }}
             color="warning"
             type="button"
           >

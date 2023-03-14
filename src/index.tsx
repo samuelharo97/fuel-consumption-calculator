@@ -1,12 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App';
-import {
-  CssBaseline,
-  StyledEngineProvider,
-  ThemeProvider
-} from '@mui/material';
-import { GlobalTheme, darkTheme, lightTheme } from './themes';
+import { ThemeProvider } from '@mui/material';
+import { GlobalTheme, lightTheme } from './themes';
 
 ReactDOM.render(
   <React.Fragment>
@@ -15,5 +11,5 @@ ReactDOM.render(
       <App />
     </ThemeProvider>
   </React.Fragment>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
