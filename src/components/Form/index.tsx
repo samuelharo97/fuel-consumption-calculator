@@ -2,6 +2,12 @@ import { useFormik } from 'formik';
 import { FlexDiv, FormContainer, SubmitButton } from './styles';
 import { Autocomplete, TextField } from '@mui/material';
 import { TruckBrands } from '../../utils/trucks';
+import { VehicleData } from '../../types/vehicle-data.type';
+import { useEffect } from 'react';
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage
+} from '../../utils/local-storage';
 
 interface VehicleFormValues {
   licensePlate: string;
@@ -21,14 +27,25 @@ const initialValues: VehicleFormValues = {
   distanceTravelled: 0
 };
 
-export const Form = () => {
+interface FormOptionalProps {
+  data?: VehicleData;
+}
+
+export const Form: React.FC<FormOptionalProps> = ({ data }) => {
   const formik = useFormik({
     initialValues,
     onSubmit: values => {
       console.log(values);
       // Calculate average fuel consumption per ton transported
       // and add the calculation result to the history list.
+
+      if (!data) {
+        // createVehicle(values) //
+      } else {
+        handleEdit(values, data.id);
+      }
     },
+
     validate: values => {
       const errors: Partial<VehicleFormValues> = {};
       if (!values.licensePlate) {
@@ -55,6 +72,40 @@ export const Form = () => {
       return errors;
     }
   });
+
+  const handleEdit = (values: VehicleFormValues, id: string) => {
+    const prevData: VehicleData[] = loadFromLocalStorage('@Trucks');
+
+    const updatedData = prevData.map(data => {
+      if (data.id === id) {
+        // const total = calculateConsumption(values)
+        return {
+          ...data,
+          licensePlate: values.licensePlate,
+          vehicleModel: values.vehicleModel,
+          tankCapacity: values.tankCapacity,
+          maxLoad: values.maxLoad,
+          averageConsumption: values.averageConsumption,
+          distanceTravelled: values.distanceTravelled
+          // totalConsumption: total
+        };
+      } else {
+        return data;
+      }
+    });
+    saveToLocalStorage('@Trucks', updatedData);
+  };
+
+  useEffect(() => {
+    if (data) {
+      formik.setFieldValue('averageConsumption', data.averageConsumption);
+      formik.setFieldValue('distanceTravelled', data.distanceTravelled);
+      formik.setFieldValue('licensePlate', data.licensePlate);
+      formik.setFieldValue('maxLoad', data.maxLoad);
+      formik.setFieldValue('tankCapacity', data.tankCapacity);
+      formik.setFieldValue('vehicleModel', data.vehicleModel);
+    }
+  }, []);
 
   const resetForm = () => {
     formik.setFieldValue('averageConsumption', 0);
@@ -144,19 +195,25 @@ export const Form = () => {
         }
       />
 
-      <FlexDiv>
-        <SubmitButton
-          variant="contained"
-          onClick={() => resetForm()}
-          color="warning"
-          type="button"
-        >
-          Limpar
-        </SubmitButton>
+      {data ? (
         <SubmitButton variant="contained" color="primary" type="submit">
-          Calcular
+          Salvar
         </SubmitButton>
-      </FlexDiv>
+      ) : (
+        <FlexDiv>
+          <SubmitButton
+            variant="contained"
+            onClick={() => resetForm()}
+            color="warning"
+            type="button"
+          >
+            Limpar
+          </SubmitButton>
+          <SubmitButton variant="contained" color="primary" type="submit">
+            Calcular
+          </SubmitButton>
+        </FlexDiv>
+      )}
     </FormContainer>
   );
 };

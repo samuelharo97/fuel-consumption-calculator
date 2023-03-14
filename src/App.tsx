@@ -1,9 +1,15 @@
-import * as React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Form } from './components/Form';
 import { HeaderSidebar } from './components/Header';
+import { VehicleTable } from './components/VehicleTable';
+import { useEffect, useState } from 'react';
+import { VehicleData } from './types/vehicle-data.type';
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage
+} from './utils/local-storage';
 
 // function Copyright() {
 //   return (
@@ -19,26 +25,44 @@ import { HeaderSidebar } from './components/Header';
 
 const vehicles = [
   {
+    id: 'asdfjnuio',
     licensePlate: 'ABC123',
     vehicleModel: 'Honda Civic',
     tankCapacity: 50,
     maxLoad: 1000,
     averageConsumption: 10,
     distanceTravelled: 500,
-    consumption: 50
+    totalConsumption: 50
   },
   {
+    id: '23rpdś',
     licensePlate: 'DEF456',
     vehicleModel: 'Toyota Corolla',
     tankCapacity: 40,
     maxLoad: 800,
     averageConsumption: 8,
     distanceTravelled: 400,
-    consumption: 32
+    totalConsumption: 32
   }
 ];
 
 export default function App() {
+  const [trucks, setTrucks] = useState<VehicleData[]>([]);
+
+  useEffect(() => {
+    const trucksExist: VehicleData[] = loadFromLocalStorage('@Trucks');
+
+    trucksExist.length > 0 ? setTrucks(trucksExist) : setTrucks([...vehicles]);
+    saveToLocalStorage('@Trucks', vehicles);
+  }, []);
+
+  const deleteVehicle = (id: string) => {
+    console.log(id);
+    const vehicles = trucks.filter(vehicle => vehicle.id != id);
+    saveToLocalStorage('@Trucks', vehicles);
+    setTrucks(vehicles);
+  };
+
   return (
     <>
       <HeaderSidebar />
@@ -46,7 +70,7 @@ export default function App() {
         <Box sx={{ my: 24 }}>
           <Typography variant="h1" component="h1" gutterBottom></Typography>
         </Box>
-        <Form></Form>
+        <VehicleTable handleDeleteTruck={deleteVehicle} data={trucks} />
       </Container>
     </>
   );
