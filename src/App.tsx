@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Form } from './components/Form';
 import { HeaderSidebar } from './components/Header';
+import { VehicleTable } from './components/VehicleTable';
 
 // function Copyright() {
 //   return (
@@ -46,7 +47,7 @@ export default function App() {
         <Box sx={{ my: 24 }}>
           <Typography variant="h1" component="h1" gutterBottom></Typography>
         </Box>
-        <Form></Form>
+        <VehicleTable data={vehicles} />
       </Container>
     </>
   );
