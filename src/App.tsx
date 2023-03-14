@@ -26,7 +26,7 @@ export default function App() {
         </Typography>
         {/* <Copyright /> */}
       </Box>
-      <FolightThemerm></FolightThemerm>
+      <Form></Form>
     </Container>
   );
 }
