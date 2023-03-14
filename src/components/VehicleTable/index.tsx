@@ -9,22 +9,20 @@ import {
 } from '@mui/material';
 import { TableHeaderCell, StyledTableRow } from './styles';
 import { DeleteTooltip } from '../DeleteTooltip';
-
-interface VehicleFormValues {
-  licensePlate: string;
-  vehicleModel: string;
-  tankCapacity: number;
-  maxLoad: number;
-  averageConsumption: number;
-  distanceTravelled: number;
-  consumption: number;
-}
+import { VehicleData } from '../../types/vehicle-data.type';
 
 interface TableProps {
-  data: VehicleFormValues[];
+  data: VehicleData[];
 }
 
 export const VehicleTable: React.FC<TableProps> = ({ data }) => {
+  const deleteVehicle = (id: string) => {
+    console.log(id);
+    const vehicles = data.filter(vehicle => vehicle.id != id);
+
+    localStorage.setItem('@Trucks', JSON.stringify(vehicles));
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -40,17 +38,17 @@ export const VehicleTable: React.FC<TableProps> = ({ data }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((vehicle, index) => (
-            <StyledTableRow key={index}>
+          {data.map(vehicle => (
+            <StyledTableRow key={vehicle.id}>
               <TableCell>{vehicle.licensePlate}</TableCell>
               <TableCell>{vehicle.vehicleModel}</TableCell>
               <TableCell>{vehicle.tankCapacity}</TableCell>
               <TableCell>{vehicle.maxLoad}</TableCell>
               <TableCell>{vehicle.averageConsumption}</TableCell>
               <TableCell>{vehicle.distanceTravelled}</TableCell>
-              <TableCell>{vehicle.consumption}</TableCell>
+              <TableCell>{vehicle.totalConsumption}</TableCell>
               <TableCell>
-                <DeleteTooltip />
+                <DeleteTooltip removeRow={() => deleteVehicle(vehicle.id)} />
               </TableCell>
             </StyledTableRow>
           ))}
