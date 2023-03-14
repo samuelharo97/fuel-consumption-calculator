@@ -1,19 +1,16 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Analytics } from '../pages/Analytics';
+import { Routes, Route } from 'react-router-dom';
 import { CalculateForm } from '../pages/CalculateForm';
+import { Table } from '../pages/Table';
+import { Analytics } from '../pages/Analytics';
 import { Home } from '../pages/Home';
 
-export const AppRoutes = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/calculate',
-    element: <CalculateForm />,
-  },
-  {
-    path: '/analytics', // details
-    element: <Analytics />,
-  },
-]);
+export const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/table" element={<Table />} />
+      <Route path="/calculate" element={<CalculateForm />} />
+      <Route path="/analytics" element={<Analytics />} />
+    </Routes>
+  );
+};
