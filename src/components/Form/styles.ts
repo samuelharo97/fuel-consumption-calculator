@@ -1,6 +1,6 @@
-import { Button, TextField, styled } from '@mui/material';
-
+import styled from 'styled-components';
 import { Box } from '@mui/system';
+import { TextField, Button } from '@mui/material';
 
 export const StyledDiv = styled(Box)({
   background: '#fff',
@@ -15,6 +15,10 @@ export const FormContainer = styled('form')({
   maxWidth: '400px',
   margin: '0 auto'
 });
+
+export const StyledDive = styled.div`
+  background: ${({ theme }) => theme.palette.primary.main};
+`;
 
 export const FormTitle = styled('h2')({
   marginBottom: '20px'
