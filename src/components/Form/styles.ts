@@ -16,7 +16,7 @@ export const FormContainer = styled('form')({
   margin: '0 auto'
 });
 
-export const StyledDive = styled.div`
+export const StyledDive = styled.div`          <~ WORKING
   background: ${({ theme }) => theme.palette.primary.main};
 `;
 

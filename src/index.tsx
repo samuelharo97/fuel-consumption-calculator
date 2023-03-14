@@ -6,8 +6,8 @@ import { GlobalTheme, darkTheme, lightTheme } from './themes';
 
 ReactDOM.render(
   <React.Fragment>
-    <ThemeProvider theme={darkTheme}>
-      <GlobalTheme />
+    <ThemeProvider theme={lightTheme}>
+      <GlobalTheme theme={lightTheme} />
       <App />
     </ThemeProvider>
   </React.Fragment>,
