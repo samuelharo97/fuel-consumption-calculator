@@ -1,8 +1,7 @@
-import Box from '@mui/material/Box';
-import type React from 'react';
-import Modal from '@mui/material/Modal';
+
 import { Form } from '../Form';
 import type { VehicleData } from '../../types';
+import { Modal, Box } from '@mui/material';
 
 const style = {
   position: 'absolute' as 'absolute',

@@ -15,6 +15,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CalculateIcon from '@mui/icons-material/CalculateTwoTone';
 import TableIcon from '@mui/icons-material/Analytics';
+import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { AppBar, Drawer, DrawerHeader, StyledToolbar } from './styles';
 

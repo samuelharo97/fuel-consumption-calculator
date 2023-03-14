@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { useFormik } from 'formik';
-import { FlexDiv, FormContainer, SubmitButton } from './styles';
-import { Autocomplete, TextField } from '@mui/material';
-import { TruckBrands } from '../../utils/trucks';
-import type { VehicleData } from '../../types/vehicle-data.type';
-import { useEffect } from 'react';
-import type React from 'react';
-import { loadFromLocalStorage, saveToLocalStorage } from '../../utils/local-storage';
+import { TextField, Autocomplete } from "@mui/material";
+import { useEffect } from "react";
+import { FormContainer, SubmitButton, FlexDiv } from "./styles";
+import { useFormik } from "formik";
+import { VehicleData } from "../../types";
+import { loadFromLocalStorage, saveToLocalStorage, TruckBrands } from "../../utils";
+
 
 interface VehicleFormValues {
   licensePlate: string;
