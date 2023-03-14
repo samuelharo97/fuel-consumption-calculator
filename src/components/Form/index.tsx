@@ -4,6 +4,10 @@ import { Autocomplete, TextField } from '@mui/material';
 import { TruckBrands } from '../../utils/trucks';
 import { VehicleData } from '../../types/vehicle-data.type';
 import { useEffect } from 'react';
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage
+} from '../../utils/local-storage';
 
 interface VehicleFormValues {
   licensePlate: string;
@@ -34,7 +38,14 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
       console.log(values);
       // Calculate average fuel consumption per ton transported
       // and add the calculation result to the history list.
+
+      if (!data) {
+        // createVehicle(values) //
+      } else {
+        handleEdit(values, data.id);
+      }
     },
+
     validate: values => {
       const errors: Partial<VehicleFormValues> = {};
       if (!values.licensePlate) {
@@ -61,6 +72,29 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
       return errors;
     }
   });
+
+  const handleEdit = (values: VehicleFormValues, id: string) => {
+    const prevData: VehicleData[] = loadFromLocalStorage('@Trucks');
+
+    const updatedData = prevData.map(data => {
+      if (data.id === id) {
+        // const total = calculateConsumption(values)
+        return {
+          ...data,
+          licensePlate: values.licensePlate,
+          vehicleModel: values.vehicleModel,
+          tankCapacity: values.tankCapacity,
+          maxLoad: values.maxLoad,
+          averageConsumption: values.averageConsumption,
+          distanceTravelled: values.distanceTravelled
+          // totalConsumption: total
+        };
+      } else {
+        return data;
+      }
+    });
+    saveToLocalStorage('@Trucks', updatedData);
+  };
 
   useEffect(() => {
     if (data) {
