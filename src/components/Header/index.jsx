@@ -16,6 +16,7 @@ import ListItemText from '@mui/material/ListItemText';
 import CalculateIcon from '@mui/icons-material/CalculateTwoTone';
 import TableIcon from '@mui/icons-material/TableChart';
 import SettingsIcon from '@mui/icons-material/Settings';
+import HomepageIcon from '@mui/icons-material/FireTruckOutlined';
 import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
 import { AppBar, Drawer, DrawerHeader, StyledToolbar } from './styles';
 import { Link } from 'react-router-dom';
@@ -71,6 +72,28 @@ export const HeaderSidebar = () => {
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               component={Link}
+              to="/"
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <HomepageIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Página inicial'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
               to="/calculate"
               sx={{
                 minHeight: 48,
@@ -94,7 +117,7 @@ export const HeaderSidebar = () => {
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               component={Link}
-              to="/"
+              to="/table"
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -117,7 +140,7 @@ export const HeaderSidebar = () => {
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               component={Link}
-              to="/"
+              to="/analytics"
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',

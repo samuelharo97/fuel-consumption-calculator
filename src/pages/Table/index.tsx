@@ -32,7 +32,10 @@ export const Table = (): any => {
   useEffect(() => {
     const trucksExist: VehicleData[] = loadFromLocalStorage('@Trucks');
 
-    trucksExist.length > 0 ? setTrucks(trucksExist) : setTrucks([...vehicles]);
+    if (!trucksExist) {
+      setTrucks([...vehicles]);
+    }
+
     saveToLocalStorage('@Trucks', vehicles);
   }, []);
 
