@@ -8,7 +8,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { VehicleData } from '../../types';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -51,10 +50,10 @@ export const FuelConsumptionChart: React.FC<FuelConsumptionChartProps> = ({ data
     labels: data.map((d) => d.vehicleModel),
     datasets: [
       {
-        label: 'Fuel Consumption by Truck Model',
+        label: 'Fuel Consumption by Vehicle Model',
         data: data.map((d) => d.totalConsumption),
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
+        backgroundColor: 'rgba(135, 201, 132, 0.4)',
+        borderColor: '#00863F',
         borderWidth: 1,
       },
     ],

@@ -51,7 +51,7 @@ export const HeaderSidebar = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h5" component="div">
-              TFCC - Truck Fuel Consumption Calculator
+              FCC - Fuel Consumption Calculator
             </Typography>
           </Box>
 
