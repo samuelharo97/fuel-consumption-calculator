@@ -12,8 +12,9 @@ import { DeleteTooltip } from '../DeleteTooltip';
 import type { VehicleData } from '../../types/vehicle-data.type';
 import { EditTooltip } from '../EditTooltip';
 import { EditModal } from '../EditModal';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { loadFromLocalStorage } from '../../utils/local-storage';
+import { VehicleContext } from '../../context/VehicleContext';
 
 interface TableProps {
   data: VehicleData[];
@@ -23,11 +24,10 @@ interface TableProps {
 export const VehicleTable: React.FC<TableProps> = ({ data, handleDeleteTruck }) => {
   const [open, setOpen] = useState(false);
   const [editVehicle, setEditVehicle] = useState<VehicleData>();
+  const { vehicles } = useContext(VehicleContext);
 
   const handleOpen = (id: string): void => {
-    const allTrucks: VehicleData[] = loadFromLocalStorage('@Trucks');
-
-    const truckToEdit = allTrucks.find((vehicle) => vehicle.id === id);
+    const truckToEdit = vehicles.find((vehicle) => vehicle.id === id);
 
     if (truckToEdit == null) {
       throw new Error('Truck not found');

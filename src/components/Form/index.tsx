@@ -1,19 +1,10 @@
-import { TextField, Autocomplete } from "@mui/material";
-import { useEffect } from "react";
-import { FormContainer, SubmitButton, FlexDiv } from "./styles";
-import { useFormik } from "formik";
-import { VehicleData } from "../../types";
-import { loadFromLocalStorage, saveToLocalStorage, TruckBrands } from "../../utils";
-
-
-interface VehicleFormValues {
-  licensePlate: string;
-  vehicleModel: string;
-  tankCapacity: number;
-  maxLoad: number;
-  averageConsumption: number;
-  distanceTravelled: number;
-}
+import { TextField, Autocomplete } from '@mui/material';
+import { useEffect } from 'react';
+import { FormContainer, SubmitButton, FlexDiv } from './styles';
+import { useFormik } from 'formik';
+import { VehicleData, VehicleFormValues } from '../../types';
+import { TruckBrands } from '../../utils';
+import { useVehicle } from '../../hooks/useVehicle';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',
@@ -30,10 +21,12 @@ interface FormOptionalProps {
 }
 
 export const Form: React.FC<FormOptionalProps> = ({ data }) => {
+  const { handleEdit, createVehicle } = useVehicle();
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      console.log(values);
+      createVehicle(values);
       // Calculate average fuel consumption per ton transported
       // and add the calculation result to the history list.
 
@@ -68,29 +61,6 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
       return errors;
     },
   });
-
-  const handleEdit = (values: VehicleFormValues, id: string): void => {
-    const prevData: VehicleData[] = loadFromLocalStorage('@Trucks');
-
-    const updatedData = prevData.map((data) => {
-      if (data.id === id) {
-        // const total = calculateConsumption(values)
-        return {
-          ...data,
-          licensePlate: values.licensePlate,
-          vehicleModel: values.vehicleModel,
-          tankCapacity: values.tankCapacity,
-          maxLoad: values.maxLoad,
-          averageConsumption: values.averageConsumption,
-          distanceTravelled: values.distanceTravelled,
-          // totalConsumption: total
-        };
-      } else {
-        return data;
-      }
-    });
-    saveToLocalStorage('@Trucks', updatedData);
-  };
 
   useEffect(() => {
     if (data != null) {
