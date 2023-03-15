@@ -1,4 +1,4 @@
-import { TextField, Autocomplete } from '@mui/material';
+import { TextField, Autocomplete, InputAdornment } from '@mui/material';
 import { useEffect } from 'react';
 import { FormContainer, SubmitButton, FlexDiv } from './styles';
 import { useFormik } from 'formik';
@@ -17,7 +17,6 @@ const initialValues: VehicleFormValues = {
 
 interface FormOptionalProps {
   data?: VehicleData;
-  handleEdit?: () => void;
 }
 
 export const Form: React.FC<FormOptionalProps> = ({ data }) => {
@@ -110,6 +109,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         label="Capacidade do Tanque"
         variant="outlined"
         {...formik.getFieldProps('tankCapacity')}
+        InputProps={{
+          endAdornment: <InputAdornment position="start">litros</InputAdornment>,
+        }}
         error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
         helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
       />
@@ -117,6 +119,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         id="maxLoad"
         label="Carga máxima"
         variant="outlined"
+        InputProps={{
+          endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
+        }}
         {...formik.getFieldProps('maxLoad')}
         error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
         helperText={formik.touched.maxLoad && formik.errors.maxLoad}
@@ -125,7 +130,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         id="averageConsumption"
         label="Consumo médio"
         variant="outlined"
-        type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
+        }}
         {...formik.getFieldProps('averageConsumption')}
         error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
         helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
@@ -134,6 +141,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         id="distanceTravelled"
         label="Distância percorrida"
         variant="outlined"
+        InputProps={{
+          endAdornment: <InputAdornment position="start">km</InputAdornment>,
+        }}
         {...formik.getFieldProps('distanceTravelled')}
         error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
         helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}

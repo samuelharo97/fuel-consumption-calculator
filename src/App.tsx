@@ -1,7 +1,7 @@
-import { HeaderSidebar as Header } from './components/Header/Header';
 import './App.css';
 import { Container } from '@mui/material';
 import { AppRoutes } from './routes/app-routes';
+import PageLayout from './layout';
 
 const vehicles = [
   {
@@ -28,7 +28,7 @@ const vehicles = [
 function App() {
   return (
     <Container>
-      <Header />
+      <PageLayout />
       {<AppRoutes />}
     </Container>
   );

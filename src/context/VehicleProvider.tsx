@@ -14,7 +14,12 @@ export const VehicleProvider: React.FC<VehicleProviderProps> = ({ children }) =>
   const [chartInfo, setChartInfo] = useState<FuelConsumptionChartData[]>([]);
 
   useEffect(() => {
-    const saved = loadFromLocalStorage('@Trucks');
+    let saved = loadFromLocalStorage('@Trucks');
+
+    if (saved === null) {
+      saved = [];
+    }
+
     if (saved.length > 0) {
       setVehicles([...saved]);
     }

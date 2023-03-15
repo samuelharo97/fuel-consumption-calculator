@@ -1,7 +1,7 @@
 {
   "name": "fuel-consumption-calculator",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,7 +14,7 @@
     "@mui/icons-material": "latest",
     "@mui/material": "^5.11.12",
     "@mui/styled-engine-sc": "^5.11.11",
-    "@types/node": "^18.15.2",
+    "@types/node": "^18.15.3",
     "chart.js": "^4.2.1",
     "formik": "^2.2.9",
     "react": "latest",
