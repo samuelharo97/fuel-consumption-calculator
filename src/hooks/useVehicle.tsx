@@ -1,18 +1,18 @@
 import { useContext } from 'react';
-import {
-  FuelConsumptionChartData,
-  FuelConsumptionChartProps,
-  VehicleData,
-  VehicleFormValues,
-} from '../types';
+import { FuelConsumptionChartData, VehicleData, VehicleFormValues } from '../types';
 import { saveToLocalStorage } from '../utils';
 import { VehicleContext } from '../context/VehicleContext';
 import { v4 as uuidv4 } from 'uuid';
 
 export const useVehicle = () => {
-  const { setVehicles, vehicles, setChartInfo } = useContext(VehicleContext);
+  const { setVehicles, vehicles } = useContext(VehicleContext);
 
   const createVehicle = (values: VehicleFormValues): void => {
+    const totalConsumption = calculateTotal(
+      values.maxLoad,
+      values.distanceTravelled,
+      values.averageConsumption,
+    );
     const newVehicle: VehicleData = {
       id: '',
       licensePlate: '',
@@ -31,9 +31,18 @@ export const useVehicle = () => {
     newVehicle.maxLoad = values.maxLoad;
     newVehicle.tankCapacity = values.tankCapacity;
     newVehicle.vehicleModel = values.vehicleModel;
-    newVehicle.totalConsumption = 500;
-
+    newVehicle.totalConsumption = totalConsumption;
     setVehicles([...vehicles, newVehicle]);
+  };
+
+  const calculateTotal = (
+    truckLoad: number,
+    distanceTravelled: number,
+    averageConsumption: number,
+  ): number => {
+    const averageWeight = truckLoad / (distanceTravelled * 0.001);
+
+    return Number(((averageConsumption * 1000) / (averageWeight * 1000)).toFixed(3));
   };
 
   const createChartReadyData = (vehicleData: VehicleData[]): FuelConsumptionChartData[] => {
@@ -46,7 +55,11 @@ export const useVehicle = () => {
   const handleEdit = (values: VehicleFormValues, id: string): void => {
     const updatedData = vehicles.map((data) => {
       if (data.id === id) {
-        // const total = calculateConsumption(values)
+        const totalConsumption = calculateTotal(
+          values.maxLoad,
+          values.distanceTravelled,
+          values.averageConsumption,
+        );
         return {
           ...data,
           licensePlate: values.licensePlate,
@@ -55,7 +68,7 @@ export const useVehicle = () => {
           maxLoad: values.maxLoad,
           averageConsumption: values.averageConsumption,
           distanceTravelled: values.distanceTravelled,
-          // totalConsumption: total
+          totalConsumption: totalConsumption,
         };
       } else {
         return data;
@@ -65,5 +78,9 @@ export const useVehicle = () => {
     saveToLocalStorage('@Trucks', updatedData);
   };
 
-  return { handleEdit, createVehicle, createChartReadyData };
+  return {
+    handleEdit,
+    createVehicle,
+    createChartReadyData,
+  };
 };

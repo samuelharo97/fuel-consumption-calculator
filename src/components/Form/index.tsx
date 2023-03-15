@@ -26,12 +26,8 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      createVehicle(values);
-      // Calculate average fuel consumption per ton transported
-      // and add the calculation result to the history list.
-
       if (data == null) {
-        // createVehicle(values) //
+        createVehicle(values) 
       } else {
         handleEdit(values, data.id);
       }
