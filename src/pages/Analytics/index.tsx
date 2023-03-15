@@ -1,9 +1,16 @@
-import { Typography } from '@mui/material';
+import { FuelConsumptionChart } from '../../components/Chart';
+
+const vehicles = [
+  {
+    vehicleModel: 'Honda Civic',
+    totalConsumption: 50,
+  },
+  {
+    vehicleModel: 'Toyota Corolla',
+    totalConsumption: 32,
+  },
+];
 
 export const Analytics = (): any => {
-  return (
-    <Typography variant="h1" component="h1" gutterBottom>
-      Nothing to see here.. yet.
-    </Typography>
-  );
+  return <FuelConsumptionChart data={vehicles} />;
 };
