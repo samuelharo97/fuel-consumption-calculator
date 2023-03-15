@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -19,11 +18,20 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HomepageIcon from '@mui/icons-material/FireTruckOutlined';
 import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
 import { Link } from 'react-router-dom';
+import { clearLocalStorage } from '../utils';
 import { StyledToolbar, AppBar, Drawer, DrawerHeader } from './styles';
+import { VehicleContext } from '../context/VehicleContext';
 
 const PageLayout = () => {
   const theme = useTheme();
+  const { setVehicles, setChartInfo } = React.useContext(VehicleContext);
   const [open, setOpen] = React.useState(false);
+
+  const handleClear = () => {
+    clearLocalStorage();
+    setVehicles([]);
+    setChartInfo([]);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -56,8 +64,9 @@ const PageLayout = () => {
           </Box>
 
           <Box className="second">
-            <Typography component="a">Analytics</Typography>
-            <Typography component="a">Logout</Typography>
+            <Typography onClick={() => handleClear()} component="a">
+              Clear Trucks
+            </Typography>
           </Box>
         </StyledToolbar>
       </AppBar>

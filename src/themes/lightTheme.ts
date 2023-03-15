@@ -45,5 +45,8 @@ export const lightTheme: DefaultTheme = createTheme({
       black: '#495057',
     },
   },
+  typography: {
+    fontFamily: 'Nunito Sans, sans-serif',
+  },
   transitions: {},
 });

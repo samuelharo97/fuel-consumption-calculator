@@ -47,13 +47,13 @@ export const VehicleTable: React.FC<TableProps> = ({ data, handleDeleteTruck }) 
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeaderCell>License Plate</TableHeaderCell>
-              <TableHeaderCell>Vehicle Model</TableHeaderCell>
-              <TableHeaderCell>Tank Capacity</TableHeaderCell>
-              <TableHeaderCell>Max Load</TableHeaderCell>
-              <TableHeaderCell>Average Consumption</TableHeaderCell>
-              <TableHeaderCell>Distance Travelled</TableHeaderCell>
-              <TableHeaderCell>Consumption</TableHeaderCell>
+              <TableHeaderCell>Placa</TableHeaderCell>
+              <TableHeaderCell>Modelo</TableHeaderCell>
+              <TableHeaderCell>Capacidade do tanque</TableHeaderCell>
+              <TableHeaderCell>Carga máxima</TableHeaderCell>
+              <TableHeaderCell>Consumo médio</TableHeaderCell>
+              <TableHeaderCell>Distância percorrida</TableHeaderCell>
+              <TableHeaderCell>Consumo total</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>

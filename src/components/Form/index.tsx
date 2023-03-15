@@ -1,10 +1,12 @@
-import { TextField, Autocomplete, InputAdornment } from '@mui/material';
+import { TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { FormContainer, SubmitButton, FlexDiv } from './styles';
 import { useFormik } from 'formik';
 import { VehicleData, VehicleFormValues } from '../../types';
 import { TruckBrands } from '../../utils';
 import { useVehicle } from '../../hooks/useVehicle';
+import { vehicleValidationSchema } from './validations/schema';
+import { InfoPopover } from '../InfoPopover';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',
@@ -31,30 +33,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         handleEdit(values, data.id);
       }
     },
-
-    validate: (values) => {
-      const errors: Partial<VehicleFormValues> = {};
-      if (!values.licensePlate) {
-        errors.licensePlate = 'License Plate is required';
-      }
-      if (!values.vehicleModel) {
-        errors.vehicleModel = 'Model is required';
-      }
-      if (values.tankCapacity <= 0) {
-        errors.tankCapacity = 'Tank Capacity must be greater than 0' as unknown as number;
-      }
-      if (values.maxLoad <= 0) {
-        errors.maxLoad = 'Max Load must be greater than 0' as unknown as number;
-      }
-      if (values.averageConsumption <= 0) {
-        errors.averageConsumption =
-          'Average Consumption must be greater than 0' as unknown as number;
-      }
-      if (values.distanceTravelled <= 0) {
-        errors.distanceTravelled = 'Distance Traveled must be greater than 0' as unknown as number;
-      }
-      return errors;
-    },
+    validationSchema: vehicleValidationSchema,
   });
 
   useEffect(() => {
@@ -78,98 +57,125 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
   };
 
   return (
-    <FormContainer onSubmit={formik.handleSubmit}>
-      <TextField
-        id="licensePlate"
-        label="Placa"
-        variant="outlined"
-        {...formik.getFieldProps('licensePlate')}
-        error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
-        helperText={formik.touched.licensePlate && formik.errors.licensePlate}
-      />
-      <Autocomplete
-        id="vehicleModel"
-        options={TruckBrands}
-        freeSolo={true}
-        getOptionLabel={(option) => option}
-        value={formik.values.vehicleModel}
-        onChange={async (_event, value) => await formik.setFieldValue('vehicleModel', value ?? '')}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Modelo"
-            error={Boolean(formik.touched.vehicleModel && formik.errors.vehicleModel)}
-            helperText={formik.touched.vehicleModel && formik.errors.vehicleModel}
-          />
-        )}
-      />
+    <>
+      <Typography variant="h2" component="div">
+        Cálculo de combustível.
+      </Typography>
 
-      <TextField
-        id="tankCapacity"
-        label="Capacidade do Tanque"
-        variant="outlined"
-        {...formik.getFieldProps('tankCapacity')}
-        InputProps={{
-          endAdornment: <InputAdornment position="start">litros</InputAdornment>,
-        }}
-        error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
-        helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
-      />
-      <TextField
-        id="maxLoad"
-        label="Carga máxima"
-        variant="outlined"
-        InputProps={{
-          endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
-        }}
-        {...formik.getFieldProps('maxLoad')}
-        error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
-        helperText={formik.touched.maxLoad && formik.errors.maxLoad}
-      />
-      <TextField
-        id="averageConsumption"
-        label="Consumo médio"
-        variant="outlined"
-        InputProps={{
-          endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
-        }}
-        {...formik.getFieldProps('averageConsumption')}
-        error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
-        helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
-      />
-      <TextField
-        id="distanceTravelled"
-        label="Distância percorrida"
-        variant="outlined"
-        InputProps={{
-          endAdornment: <InputAdornment position="start">km</InputAdornment>,
-        }}
-        {...formik.getFieldProps('distanceTravelled')}
-        error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
-        helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}
-      />
+      <FormContainer onSubmit={formik.handleSubmit}>
+        <Typography variant="subtitle1" component="div">
+          Preencha os campos com atenção.
+        </Typography>
+        <TextField
+          id="licensePlate"
+          label="Placa"
+          variant="outlined"
+          InputProps={{
+            startAdornment: data ? null : (
+              <InfoPopover message="Digite o número da placa do seu veículo. Certifique-se de que está correto e atualizado para não ter problemas!" />
+            ),
+          }}
+          {...formik.getFieldProps('licensePlate')}
+          error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
+          helperText={formik.touched.licensePlate && formik.errors.licensePlate}
+        />
+        <Autocomplete
+          id="vehicleModel"
+          options={TruckBrands}
+          freeSolo={true}
+          getOptionLabel={(option) => option}
+          value={formik.values.vehicleModel}
+          onChange={async (_event, value) =>
+            await formik.setFieldValue('vehicleModel', value ?? '')
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Modelo"
+              error={Boolean(formik.touched.vehicleModel && formik.errors.vehicleModel)}
+              helperText={formik.touched.vehicleModel && formik.errors.vehicleModel}
+            />
+          )}
+        />
+        <TextField
+          id="tankCapacity"
+          label="Capacidade do Tanque"
+          variant="outlined"
+          {...formik.getFieldProps('tankCapacity')}
+          InputProps={{
+            startAdornment: data ? null : (
+              <InfoPopover message="Quanto combustível pode conter o tanque do seu veículo?" />
+            ),
+            endAdornment: <InputAdornment position="start">litros</InputAdornment>,
+          }}
+          error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
+          helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
+        />
+        <TextField
+          id="maxLoad"
+          label="Carga máxima"
+          variant="outlined"
+          InputProps={{
+            startAdornment: data ? null : (
+              <InfoPopover message="Qual o peso máximo que seu veículo pode carregar?" />
+            ),
+            endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
+          }}
+          {...formik.getFieldProps('maxLoad')}
+          error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
+          helperText={formik.touched.maxLoad && formik.errors.maxLoad}
+        />
+        <TextField
+          id="averageConsumption"
+          label="Consumo médio"
+          variant="outlined"
+          InputProps={{
+            startAdornment: data ? null : (
+              <InfoPopover message="Quanto combustível seu veículo consome por 100 quilômetros em média? Esta informação irá ajudar-nos a estimar o custo do combustível para a sua viagem." />
+            ),
+            endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
+          }}
+          {...formik.getFieldProps('averageConsumption')}
+          error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
+          helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
+        />
+        <TextField
+          id="distanceTravelled"
+          label="Distância percorrida"
+          variant="outlined"
+          InputProps={{
+            startAdornment: data ? null : (
+              <InfoPopover message="Quão longe você planeja viajar? Esta informação irá ajudar-nos a estimar o custo total de combustível da sua viagem." />
+            ),
 
-      {data != null ? (
-        <SubmitButton variant="contained" color="primary" type="submit">
-          Salvar
-        </SubmitButton>
-      ) : (
-        <FlexDiv>
-          <SubmitButton
-            variant="contained"
-            onClick={() => {
-              resetForm();
-            }}
-            color="warning"
-            type="button"
-          >
-            Limpar
-          </SubmitButton>
+            endAdornment: <InputAdornment position="start">km</InputAdornment>,
+          }}
+          {...formik.getFieldProps('distanceTravelled')}
+          error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
+          helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}
+        />
+        {data != null ? (
           <SubmitButton variant="contained" color="primary" type="submit">
-            Calcular
+            Salvar
           </SubmitButton>
-        </FlexDiv>
-      )}
-    </FormContainer>
+        ) : (
+          <FlexDiv>
+            <SubmitButton
+              variant="contained"
+              onClick={() => {
+                resetForm();
+              }}
+              color="warning"
+              type="button"
+            >
+              Limpar
+            </SubmitButton>
+            <SubmitButton variant="contained" color="primary" type="submit">
+              Calcular
+            </SubmitButton>
+          </FlexDiv>
+        )}
+      </FormContainer>
+    </>
   );
 };
