@@ -23,7 +23,7 @@ export const InfoPopover: React.FC<PopoverProps> = ({ message, ...props }) => {
   // transform: 'translate(-50%, -50%)',
 
   return (
-    <Box sx={{ alignSelf: 'center', transform: 'translate(40%, -30%)' }}>
+    <Box sx={{ alignSelf: 'center', position: 'fixed' ,transform: 'translate(580%, -0%)' }}>
       <Button onClick={handleClick}>
         <InfoIcon />
       </Button>

@@ -6,6 +6,7 @@ import { VehicleData, VehicleFormValues } from '../../types';
 import { TruckBrands } from '../../utils';
 import { useVehicle } from '../../hooks/useVehicle';
 import { vehicleValidationSchema } from './validations/schema';
+import { InfoPopover } from '../InfoPopover';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',
@@ -69,6 +70,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           id="licensePlate"
           label="Placa"
           variant="outlined"
+          InputProps={{
+            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+          }}
           {...formik.getFieldProps('licensePlate')}
           error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
           helperText={formik.touched.licensePlate && formik.errors.licensePlate}
@@ -97,6 +101,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           variant="outlined"
           {...formik.getFieldProps('tankCapacity')}
           InputProps={{
+            startAdornment: <InfoPopover message="Capacidade do tanque" />,
             endAdornment: <InputAdornment position="start">litros</InputAdornment>,
           }}
           error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
@@ -107,6 +112,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Carga máxima"
           variant="outlined"
           InputProps={{
+            startAdornment: <InfoPopover message="Capacidade do tanque" />,
             endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
           }}
           {...formik.getFieldProps('maxLoad')}
@@ -118,6 +124,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Consumo médio"
           variant="outlined"
           InputProps={{
+            startAdornment: <InfoPopover message="Capacidade do tanque" />,
             endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
           }}
           {...formik.getFieldProps('averageConsumption')}
@@ -129,6 +136,8 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Distância percorrida"
           variant="outlined"
           InputProps={{
+            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+
             endAdornment: <InputAdornment position="start">km</InputAdornment>,
           }}
           {...formik.getFieldProps('distanceTravelled')}

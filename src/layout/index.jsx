@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -19,6 +18,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HomepageIcon from '@mui/icons-material/FireTruckOutlined';
 import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
 import { Link } from 'react-router-dom';
+import { clearLocalStorage } from '../utils';
 import { StyledToolbar, AppBar, Drawer, DrawerHeader } from './styles';
 
 const PageLayout = () => {
@@ -56,8 +56,9 @@ const PageLayout = () => {
           </Box>
 
           <Box className="second">
-            <Typography component="a">Analytics</Typography>
-            <Typography component="a">Logout</Typography>
+            <Typography onClick={() => clearLocalStorage()} component="a">
+              Logout
+            </Typography>
           </Box>
         </StyledToolbar>
       </AppBar>
