@@ -1,23 +1,36 @@
 import { useEffect, useState } from 'react';
-import { VehicleData } from '../types';
+import { FuelConsumptionChartData, VehicleData } from '../types';
 import { VehicleContext } from './VehicleContext';
-import { loadFromLocalStorage } from '../utils';
+import { loadFromLocalStorage, saveToLocalStorage } from '../utils';
+import { useVehicle } from '../hooks/useVehicle';
 
 interface VehicleProviderProps {
   children: React.ReactNode;
 }
 
 export const VehicleProvider: React.FC<VehicleProviderProps> = ({ children }) => {
+  const { createChartReadyData } = useVehicle();
   const [vehicles, setVehicles] = useState<VehicleData[]>([]);
+  const [chartInfo, setChartInfo] = useState<FuelConsumptionChartData[]>([]);
 
   useEffect(() => {
     const saved = loadFromLocalStorage('@Trucks');
-    if (saved) {
+    console.log('saved');
+    if (saved.length > 0) {
       setVehicles([...saved]);
     }
   }, []);
 
+  useEffect(() => {
+    console.log('checks for loop');
+    saveToLocalStorage('@Trucks', vehicles);
+    const chartData = createChartReadyData(vehicles);
+    setChartInfo(chartData);
+  }, [vehicles]);
+
   return (
-    <VehicleContext.Provider value={{ vehicles, setVehicles }}>{children}</VehicleContext.Provider>
+    <VehicleContext.Provider value={{ vehicles, setVehicles, chartInfo, setChartInfo }}>
+      {children}
+    </VehicleContext.Provider>
   );
 };

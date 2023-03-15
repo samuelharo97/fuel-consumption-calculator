@@ -1,11 +1,16 @@
 import { useContext } from 'react';
-import { VehicleData, VehicleFormValues } from '../types';
+import {
+  FuelConsumptionChartData,
+  FuelConsumptionChartProps,
+  VehicleData,
+  VehicleFormValues,
+} from '../types';
 import { saveToLocalStorage } from '../utils';
 import { VehicleContext } from '../context/VehicleContext';
 import { v4 as uuidv4 } from 'uuid';
 
 export const useVehicle = () => {
-  const { setVehicles, vehicles } = useContext(VehicleContext);
+  const { setVehicles, vehicles, setChartInfo } = useContext(VehicleContext);
 
   const createVehicle = (values: VehicleFormValues): void => {
     const newVehicle: VehicleData = {
@@ -31,6 +36,18 @@ export const useVehicle = () => {
     setVehicles([...vehicles, newVehicle]);
   };
 
+  const createChartReadyData = (vehicleData: VehicleData[]): FuelConsumptionChartData[] => {
+    const chartProps = vehicleData.map((vehicle) => {
+      const props: FuelConsumptionChartData = {
+        totalConsumption: vehicle.totalConsumption,
+        vehicleModel: vehicle.vehicleModel,
+      };
+      return props;
+    });
+
+    return chartProps;
+  };
+
   const handleEdit = (values: VehicleFormValues, id: string): void => {
     const updatedData = vehicles.map((data) => {
       if (data.id === id) {
@@ -53,5 +70,5 @@ export const useVehicle = () => {
     saveToLocalStorage('@Trucks', updatedData);
   };
 
-  return { handleEdit, createVehicle };
+  return { handleEdit, createVehicle, createChartReadyData };
 };
