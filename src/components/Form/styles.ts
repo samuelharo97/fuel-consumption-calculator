@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Box } from '@mui/system';
-import { Button } from '@mui/material';
+import { Autocomplete, Button, TextField } from '@mui/material';
 
 export const StyledDiv = styled(Box)({
   background: '#fff',
@@ -23,6 +23,25 @@ export const FlexDiv = styled(Box)`
   padding: 0 20px;
 `;
 
+export const Container = styled(Box)`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 20px;
+`;
+
+export const StyledInput = styled(TextField)({
+  width: '800px',
+});
+export const StyledAuto = styled(Autocomplete)({
+  width: '800px',
+});
+
+export const StyledBox = styled(Box)`
+  display: flex;
+  justify-content: start;
+`;
+
 export const FormTitle = styled('h2')({
   marginBottom: '20px',
 });
@@ -31,4 +50,12 @@ export const SubmitButton = styled(Button)({
   marginTop: '20px',
   width: '120px',
   alignSelf: 'flex-end',
+});
+
+export const StyledDivForInfo = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  maxWidth: '400px',
+  margin: '0 auto',
+  gap: '43px',
 });
