@@ -1,4 +1,6 @@
+import { Link } from '@mui/material';
 import { StyledWelcomePage, Title, Description, StartButton } from './styles';
+import { Link as BrowserLink } from 'react-router-dom';
 
 export const WelcomePage = () => {
   return (
@@ -10,9 +12,11 @@ export const WelcomePage = () => {
         Nosso aplicativo permite calcular o consumo médio de combustível por tonelada transportada
         para sua frota de caminhões.
       </Description>
-      <StartButton variant="contained" size="large" color="primary">
-        Começar
-      </StartButton>
+      <Link component={BrowserLink} to={'/calculate'}>
+        <StartButton size="large" variant="contained" color="primary">
+          Começar
+        </StartButton>
+      </Link>
     </StyledWelcomePage>
   );
 };
