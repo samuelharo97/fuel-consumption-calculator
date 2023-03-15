@@ -8,50 +8,45 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { FuelConsumptionChartProps } from '../../types';
+import { useVehicle } from '../../hooks/useVehicle';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-type FuelConsumptionChartData = {
-  vehicleModel: string;
-  totalConsumption: number;
-};
+export const FuelConsumptionChart: React.FC<FuelConsumptionChartProps> = ({ data }) => {
+  const { calculateAverageConsumptionByModel } = useVehicle();
+  const averageConsumptionsByModel = calculateAverageConsumptionByModel(data);
+  const dataMax = data.map((vehicle) => vehicle.totalConsumption);
 
-const fuelConsumptions = [6.5, 7.8, 5.6, 8.2, 6.1]; // liters per 100km
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Average Fuel Consumption by Truck Model',
-    },
-  },
-  scales: {
-    y: {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
       title: {
         display: true,
-        text: 'Liters per Ton per 100km',
+        text: 'Consumo médio por modelo',
       },
-      suggestedMin: 0,
-      suggestedMax: Math.max(...fuelConsumptions) + 1,
     },
-  },
-};
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: 'Litros por Tonelada por 100km',
+        },
+        suggestedMin: 0,
+        suggestedMax: Math.max(...dataMax) + 1,
+      },
+    },
+  };
 
-type FuelConsumptionChartProps = {
-  data: FuelConsumptionChartData[];
-};
-
-export const FuelConsumptionChart: React.FC<FuelConsumptionChartProps> = ({ data }) => {
   const value = {
-    labels: data.map((d) => d.vehicleModel),
+    labels: averageConsumptionsByModel.map((item) => item.vehicleModel),
     datasets: [
       {
-        label: 'Fuel Consumption by Vehicle Model',
-        data: data.map((d) => d.totalConsumption),
+        label: 'Consumo de combustível por modelo',
+        data: averageConsumptionsByModel.map((item) => item.averageConsumption),
         backgroundColor: 'rgba(135, 201, 132, 0.4)',
         borderColor: '#00863F',
         borderWidth: 1,

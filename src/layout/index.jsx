@@ -18,10 +18,10 @@ import TableIcon from '@mui/icons-material/TableChart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HomepageIcon from '@mui/icons-material/FireTruckOutlined';
 import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
-import { AppBar, Drawer, DrawerHeader, StyledToolbar } from './styles';
 import { Link } from 'react-router-dom';
+import { StyledToolbar, AppBar, Drawer, DrawerHeader } from './styles';
 
-export const HeaderSidebar = () => {
+const PageLayout = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -189,3 +189,5 @@ export const HeaderSidebar = () => {
     </Box>
   );
 };
+
+export default PageLayout;

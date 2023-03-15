@@ -1,5 +1,10 @@
 import { createTheme } from '@mui/material/styles';
 import type { DefaultTheme } from 'styled-components';
+import { Theme } from '@mui/material/styles';
+
+declare module '@mui/system' {
+  interface DefaultTheme extends Theme {}
+}
 
 export const lightTheme: DefaultTheme = createTheme({
   palette: {

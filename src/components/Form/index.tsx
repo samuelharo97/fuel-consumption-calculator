@@ -1,19 +1,10 @@
-import { TextField, Autocomplete } from "@mui/material";
-import { useEffect } from "react";
-import { FormContainer, SubmitButton, FlexDiv } from "./styles";
-import { useFormik } from "formik";
-import { VehicleData } from "../../types";
-import { loadFromLocalStorage, saveToLocalStorage, TruckBrands } from "../../utils";
-
-
-interface VehicleFormValues {
-  licensePlate: string;
-  vehicleModel: string;
-  tankCapacity: number;
-  maxLoad: number;
-  averageConsumption: number;
-  distanceTravelled: number;
-}
+import { TextField, Autocomplete, InputAdornment } from '@mui/material';
+import { useEffect } from 'react';
+import { FormContainer, SubmitButton, FlexDiv } from './styles';
+import { useFormik } from 'formik';
+import { VehicleData, VehicleFormValues } from '../../types';
+import { TruckBrands } from '../../utils';
+import { useVehicle } from '../../hooks/useVehicle';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',
@@ -26,19 +17,16 @@ const initialValues: VehicleFormValues = {
 
 interface FormOptionalProps {
   data?: VehicleData;
-  handleEdit?: () => void;
 }
 
 export const Form: React.FC<FormOptionalProps> = ({ data }) => {
+  const { handleEdit, createVehicle } = useVehicle();
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      console.log(values);
-      // Calculate average fuel consumption per ton transported
-      // and add the calculation result to the history list.
-
       if (data == null) {
-        // createVehicle(values) //
+        createVehicle(values);
       } else {
         handleEdit(values, data.id);
       }
@@ -68,29 +56,6 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
       return errors;
     },
   });
-
-  const handleEdit = (values: VehicleFormValues, id: string): void => {
-    const prevData: VehicleData[] = loadFromLocalStorage('@Trucks');
-
-    const updatedData = prevData.map((data) => {
-      if (data.id === id) {
-        // const total = calculateConsumption(values)
-        return {
-          ...data,
-          licensePlate: values.licensePlate,
-          vehicleModel: values.vehicleModel,
-          tankCapacity: values.tankCapacity,
-          maxLoad: values.maxLoad,
-          averageConsumption: values.averageConsumption,
-          distanceTravelled: values.distanceTravelled,
-          // totalConsumption: total
-        };
-      } else {
-        return data;
-      }
-    });
-    saveToLocalStorage('@Trucks', updatedData);
-  };
 
   useEffect(() => {
     if (data != null) {
@@ -144,6 +109,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         label="Capacidade do Tanque"
         variant="outlined"
         {...formik.getFieldProps('tankCapacity')}
+        InputProps={{
+          endAdornment: <InputAdornment position="start">litros</InputAdornment>,
+        }}
         error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
         helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
       />
@@ -151,6 +119,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         id="maxLoad"
         label="Carga máxima"
         variant="outlined"
+        InputProps={{
+          endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
+        }}
         {...formik.getFieldProps('maxLoad')}
         error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
         helperText={formik.touched.maxLoad && formik.errors.maxLoad}
@@ -159,7 +130,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         id="averageConsumption"
         label="Consumo médio"
         variant="outlined"
-        type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
+        }}
         {...formik.getFieldProps('averageConsumption')}
         error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
         helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
@@ -168,6 +141,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         id="distanceTravelled"
         label="Distância percorrida"
         variant="outlined"
+        InputProps={{
+          endAdornment: <InputAdornment position="start">km</InputAdornment>,
+        }}
         {...formik.getFieldProps('distanceTravelled')}
         error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
         helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}

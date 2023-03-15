@@ -75,12 +75,10 @@ export const Drawer = styled(MuiDrawer, {
 export const StyledToolbar = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
-
   div {
     display: flex;
     align-items: center;
   }
-
   .second {
     margin-right: 25px;
     gap: 40px;
