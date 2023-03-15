@@ -30,7 +30,6 @@ export const Table = (): any => {
   const { setVehicles, vehicles } = useContext(VehicleContext);
 
   const deleteVehicle = (id: string): void => {
-    console.log(id);
     const filteredVehicles = vehicles.filter((vehicle) => vehicle.id !== id);
     saveToLocalStorage('@Trucks', filteredVehicles);
     setVehicles(filteredVehicles);

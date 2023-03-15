@@ -15,14 +15,12 @@ export const VehicleProvider: React.FC<VehicleProviderProps> = ({ children }) =>
 
   useEffect(() => {
     const saved = loadFromLocalStorage('@Trucks');
-    console.log('saved');
     if (saved.length > 0) {
       setVehicles([...saved]);
     }
   }, []);
 
   useEffect(() => {
-    console.log('checks for loop');
     saveToLocalStorage('@Trucks', vehicles);
     const chartData = createChartReadyData(vehicles);
     setChartInfo(chartData);

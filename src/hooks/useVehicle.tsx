@@ -3,6 +3,7 @@ import { FuelConsumptionChartData, VehicleData, VehicleFormValues } from '../typ
 import { saveToLocalStorage } from '../utils';
 import { VehicleContext } from '../context/VehicleContext';
 import { v4 as uuidv4 } from 'uuid';
+import { FuelConsumptionByModel } from '../types/chart-data.type';
 
 export const useVehicle = () => {
   const { setVehicles, vehicles } = useContext(VehicleContext);
@@ -78,9 +79,42 @@ export const useVehicle = () => {
     saveToLocalStorage('@Trucks', updatedData);
   };
 
+  function calculateAverageConsumptionByModel(
+    vehicles: FuelConsumptionChartData[],
+  ): FuelConsumptionByModel[] {
+    const fuelConsumptionsByModel: { [model: string]: number[] } = {};
+    const numVehiclesByModel: { [model: string]: number } = {};
+
+    vehicles.forEach((vehicle) => {
+      const { vehicleModel, totalConsumption } = vehicle;
+      if (!fuelConsumptionsByModel[vehicleModel]) {
+        fuelConsumptionsByModel[vehicleModel] = [];
+        numVehiclesByModel[vehicleModel] = 0;
+      }
+      fuelConsumptionsByModel[vehicleModel].push(totalConsumption);
+      numVehiclesByModel[vehicleModel]++;
+    });
+
+    const fuelConsumptionByModel: FuelConsumptionByModel[] = Object.keys(
+      fuelConsumptionsByModel,
+    ).map((model) => {
+      const totalConsumption = fuelConsumptionsByModel[model].reduce((acc, curr) => acc + curr, 0);
+      const numVehicles = numVehiclesByModel[model];
+      const averageConsumption = totalConsumption / numVehicles;
+      return {
+        vehicleModel: model,
+        numVehicles: numVehicles,
+        averageConsumption,
+      };
+    });
+
+    return fuelConsumptionByModel;
+  }
+
   return {
     handleEdit,
     createVehicle,
     createChartReadyData,
+    calculateAverageConsumptionByModel,
   };
 };

@@ -15,7 +15,6 @@ import { VehicleContext } from '../../context/VehicleContext';
 
 export const Analytics = (): any => {
   const { chartInfo } = useContext(VehicleContext);
-  console.log(chartInfo, 'chart info analytics');
 
   return <FuelConsumptionChart data={chartInfo} />;
 };

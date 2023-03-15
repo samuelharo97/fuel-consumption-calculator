@@ -27,7 +27,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
     initialValues,
     onSubmit: (values) => {
       if (data == null) {
-        createVehicle(values) 
+        createVehicle(values);
       } else {
         handleEdit(values, data.id);
       }

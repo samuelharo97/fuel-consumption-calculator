@@ -6,3 +6,9 @@ export type FuelConsumptionChartData = {
 export type FuelConsumptionChartProps = {
   data: FuelConsumptionChartData[];
 };
+
+export type FuelConsumptionByModel = {
+  vehicleModel: string;
+  numVehicles: number;
+  averageConsumption: number;
+};

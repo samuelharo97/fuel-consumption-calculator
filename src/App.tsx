@@ -1,8 +1,7 @@
-import { HeaderSidebar as Header, VehicleTable } from './components';
+import { HeaderSidebar as Header } from './components/Header/Header';
 import './App.css';
 import { Container } from '@mui/material';
 import { AppRoutes } from './routes/app-routes';
-
 
 const vehicles = [
   {
@@ -27,7 +26,6 @@ const vehicles = [
   },
 ];
 function App() {
-
   return (
     <Container>
       <Header />
