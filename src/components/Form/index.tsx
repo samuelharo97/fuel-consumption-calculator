@@ -71,7 +71,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Placa"
           variant="outlined"
           InputProps={{
-            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+            startAdornment: data ? null : (
+              <InfoPopover message="Digite o número da placa do seu veículo. Certifique-se de que está correto e atualizado para não ter problemas!" />
+            ),
           }}
           {...formik.getFieldProps('licensePlate')}
           error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
@@ -101,7 +103,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           variant="outlined"
           {...formik.getFieldProps('tankCapacity')}
           InputProps={{
-            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+            startAdornment: data ? null : (
+              <InfoPopover message="Quanto combustível pode conter o tanque do seu veículo?" />
+            ),
             endAdornment: <InputAdornment position="start">litros</InputAdornment>,
           }}
           error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
@@ -112,7 +116,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Carga máxima"
           variant="outlined"
           InputProps={{
-            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+            startAdornment: data ? null : (
+              <InfoPopover message="Qual o peso máximo que seu veículo pode carregar?" />
+            ),
             endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
           }}
           {...formik.getFieldProps('maxLoad')}
@@ -124,7 +130,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Consumo médio"
           variant="outlined"
           InputProps={{
-            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+            startAdornment: data ? null : (
+              <InfoPopover message="Quanto combustível seu veículo consome por 100 quilômetros em média? Esta informação irá ajudar-nos a estimar o custo do combustível para a sua viagem." />
+            ),
             endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
           }}
           {...formik.getFieldProps('averageConsumption')}
@@ -136,7 +144,9 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           label="Distância percorrida"
           variant="outlined"
           InputProps={{
-            startAdornment: <InfoPopover message="Capacidade do tanque" />,
+            startAdornment: data ? null : (
+              <InfoPopover message="Quão longe você planeja viajar? Esta informação irá ajudar-nos a estimar o custo total de combustível da sua viagem." />
+            ),
 
             endAdornment: <InputAdornment position="start">km</InputAdornment>,
           }}

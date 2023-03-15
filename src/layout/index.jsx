@@ -20,10 +20,18 @@ import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
 import { Link } from 'react-router-dom';
 import { clearLocalStorage } from '../utils';
 import { StyledToolbar, AppBar, Drawer, DrawerHeader } from './styles';
+import { VehicleContext } from '../context/VehicleContext';
 
 const PageLayout = () => {
   const theme = useTheme();
+  const { setVehicles, setChartInfo } = React.useContext(VehicleContext);
   const [open, setOpen] = React.useState(false);
+
+  const handleClear = () => {
+    clearLocalStorage();
+    setVehicles([]);
+    setChartInfo([]);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -56,8 +64,8 @@ const PageLayout = () => {
           </Box>
 
           <Box className="second">
-            <Typography onClick={() => clearLocalStorage()} component="a">
-              Logout
+            <Typography onClick={() => handleClear()} component="a">
+              Clear Trucks
             </Typography>
           </Box>
         </StyledToolbar>
