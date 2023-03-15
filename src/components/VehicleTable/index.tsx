@@ -13,7 +13,6 @@ import type { VehicleData } from '../../types/vehicle-data.type';
 import { EditTooltip } from '../EditTooltip';
 import { EditModal } from '../EditModal';
 import { useContext, useState } from 'react';
-import { loadFromLocalStorage } from '../../utils/local-storage';
 import { VehicleContext } from '../../context/VehicleContext';
 
 interface TableProps {

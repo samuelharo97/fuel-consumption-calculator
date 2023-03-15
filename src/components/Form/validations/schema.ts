@@ -6,7 +6,9 @@ export const vehicleValidationSchema = Yup.object().shape({
     .matches(
       /[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/,
       'Placa inválida, tente sem hífen, como: MZW4550, MYF8104, IAO4372, ADC9313',
-    ),
+    )
+    .min(7, 'Placa inválida, tente sem hífen, como: MZW4550, MYF8104, IAO4372, ADC9313')
+    .max(7, 'Placa inválida, tente sem hífen, como: MZW4550, MYF8104, IAO4372, ADC9313'),
   vehicleModel: Yup.string().required('Modelo é um campo obrigatório.'),
   tankCapacity: Yup.number()
     .required('Capacidade do tanque é um campo obrigatório.')

@@ -14,5 +14,5 @@ export const TruckBrands = [
   'Troller T4',
   'FNM D-11000',
   'Engesa EE-25',
-  'Agrale TX1600'
+  'Agrale TX1600',
 ];

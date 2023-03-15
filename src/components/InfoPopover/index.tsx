@@ -1,4 +1,4 @@
-import { Tooltip, IconButton, Button, Popover, Typography, Box } from '@mui/material';
+import { Button, Popover, Typography, Box } from '@mui/material';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 import { useState } from 'react';
 
@@ -6,7 +6,7 @@ interface PopoverProps {
   message: string;
 }
 
-export const InfoPopover: React.FC<PopoverProps> = ({ message, ...props }) => {
+export const InfoPopover: React.FC<PopoverProps> = ({ message }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,7 +23,7 @@ export const InfoPopover: React.FC<PopoverProps> = ({ message, ...props }) => {
   // transform: 'translate(-50%, -50%)',
 
   return (
-    <Box sx={{ alignSelf: 'center', position: 'fixed' ,transform: 'translate(580%, -0%)' }}>
+    <Box sx={{ alignSelf: 'center', position: 'fixed', transform: 'translate(580%, -0%)' }}>
       <Button onClick={handleClick}>
         <InfoIcon />
       </Button>
