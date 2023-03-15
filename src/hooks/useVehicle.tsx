@@ -37,15 +37,10 @@ export const useVehicle = () => {
   };
 
   const createChartReadyData = (vehicleData: VehicleData[]): FuelConsumptionChartData[] => {
-    const chartProps = vehicleData.map((vehicle) => {
-      const props: FuelConsumptionChartData = {
-        totalConsumption: vehicle.totalConsumption,
-        vehicleModel: vehicle.vehicleModel,
-      };
-      return props;
-    });
-
-    return chartProps;
+    return vehicleData.map((vehicle) => ({
+      totalConsumption: vehicle.totalConsumption,
+      vehicleModel: vehicle.vehicleModel,
+    }));
   };
 
   const handleEdit = (values: VehicleFormValues, id: string): void => {

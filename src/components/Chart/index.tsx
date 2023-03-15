@@ -15,6 +15,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const fuelConsumptions = [6.5, 7.8, 5.6, 8.2, 6.1]; // liters per 100km
 
 export const FuelConsumptionChart: React.FC<FuelConsumptionChartProps> = ({ data }) => {
+
+  
+
   const options = {
     responsive: true,
     plugins: {
