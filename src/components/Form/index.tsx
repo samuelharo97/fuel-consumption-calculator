@@ -42,6 +42,14 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
     validationSchema: vehicleValidationSchema,
   });
 
+  const handleNumberInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    const cleanedValue = value.replace(/,/g, '.');
+
+    formik.setFieldValue(name, cleanedValue);
+  };
+
   useEffect(() => {
     if (data != null) {
       formik.setFieldValue('averageConsumption', data.averageConsumption);
@@ -119,6 +127,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             ),
             endAdornment: <InputAdornment position="start">litros</InputAdornment>,
           }}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
           helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
         />
@@ -133,6 +142,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
           }}
           {...formik.getFieldProps('maxLoad')}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
           helperText={formik.touched.maxLoad && formik.errors.maxLoad}
         />
@@ -147,6 +157,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
           }}
           {...formik.getFieldProps('averageConsumption')}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
           helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
         />
@@ -162,6 +173,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             endAdornment: <InputAdornment position="start">km</InputAdornment>,
           }}
           {...formik.getFieldProps('distanceTravelled')}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
           helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}
         />
