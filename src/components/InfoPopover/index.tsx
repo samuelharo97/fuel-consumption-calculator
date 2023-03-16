@@ -20,8 +20,6 @@ export const InfoPopover: React.FC<PopoverProps> = ({ message }) => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  // transform: 'translate(-50%, -50%)',
-
   return (
     <Box sx={{ alignSelf: 'center', transform: 'translate(580%, -0%)' }}>
       <Button onClick={handleClick}>
