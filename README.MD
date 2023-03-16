@@ -4,6 +4,10 @@
 
 The Fuel Consumption Calculator is a web application developed using ReactJS and Typescript. It allows users to calculate the average fuel consumption per ton transported for a fleet of trucks. The application uses the MaterialUI 5 library for styling the components and the Formik library for the application form. The app also features a bar chart that calculates average fuel consumption by truck model.
 
+### Deploy
+
+Project is deployed and can be tested at: [Vercel](https://fuel-consumption-calculator.vercel.app/)
+
 ## Installation
 
 To install the fuel consumption calculator, follow the steps below:
