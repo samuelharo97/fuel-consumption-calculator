@@ -1,5 +1,5 @@
-import { WelcomePage } from '../../components/Welcome';
+import { Welcome } from '../../components/Welcome';
 
 export const Home = () => {
-  return <WelcomePage />;
+  return <Welcome />;
 };

@@ -111,10 +111,17 @@ export const useVehicle = () => {
     return fuelConsumptionByModel;
   }
 
+  const deleteVehicle = (id: string): void => {
+    const filteredVehicles = vehicles.filter((vehicle) => vehicle.id !== id);
+    saveToLocalStorage('@Trucks', filteredVehicles);
+    setVehicles(filteredVehicles);
+  };
+
   return {
     handleEdit,
     createVehicle,
     createChartReadyData,
     calculateAverageConsumptionByModel,
+    deleteVehicle,
   };
 };

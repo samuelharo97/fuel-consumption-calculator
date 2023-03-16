@@ -8,7 +8,7 @@ import { TruckBrands } from '../../utils';
 import { useVehicle } from '../../hooks/useVehicle';
 import { vehicleValidationSchema } from './validations/schema';
 import { InfoPopover } from '../InfoPopover';
-import { VehicleDetailsDialog } from '../Dialogue';
+import { VehicleDetailsDialog } from '../VehicleDetailsDialog';
 import { VehicleContext } from '~/context/VehicleContext';
 
 const initialValues: VehicleFormValues = {

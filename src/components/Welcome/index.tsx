@@ -2,7 +2,7 @@ import { Link } from '@mui/material';
 import { StyledWelcomePage, Title, Description, StartButton } from './styles';
 import { Link as BrowserLink } from 'react-router-dom';
 
-export const WelcomePage = () => {
+export const Welcome = () => {
   return (
     <StyledWelcomePage>
       <Title variant="h1" align="center">
