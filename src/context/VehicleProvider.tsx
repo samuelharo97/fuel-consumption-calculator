@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { FuelConsumptionChartData, VehicleData } from '../types';
-import { VehicleContext } from './VehicleContext';
-import { loadFromLocalStorage, saveToLocalStorage } from '../utils';
-import { useVehicle } from '../hooks/useVehicle';
+import { useVehicle } from '~/hooks';
+import { VehicleData, FuelConsumptionChartData } from '~/types';
+import { loadFromLocalStorage, saveToLocalStorage } from '~/utils';
+import { VehicleContext } from '~/context';
 
 interface VehicleProviderProps {
   children: React.ReactNode;

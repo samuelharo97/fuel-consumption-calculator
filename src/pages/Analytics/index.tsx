@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { FuelConsumptionChart } from '../../components/Chart';
+import { FuelConsumptionChart } from '../../components/FuelConsumptionChart';
 import { VehicleContext } from '../../context/VehicleContext';
 
 export const Analytics = (): any => {

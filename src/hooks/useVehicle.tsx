@@ -1,9 +1,13 @@
 import { useContext } from 'react';
-import { FuelConsumptionChartData, VehicleData, VehicleFormValues } from '../types';
-import { saveToLocalStorage } from '../utils';
-import { VehicleContext } from '../context/VehicleContext';
 import { v4 as uuidv4 } from 'uuid';
-import { FuelConsumptionByModel } from '../types/chart-data.type';
+import { VehicleContext } from '~/context';
+import {
+  VehicleFormValues,
+  VehicleData,
+  FuelConsumptionChartData,
+  FuelConsumptionByModel,
+} from '~/types';
+import { saveToLocalStorage } from '~/utils';
 
 export const useVehicle = () => {
   const { setVehicles, vehicles } = useContext(VehicleContext);
@@ -14,6 +18,7 @@ export const useVehicle = () => {
       values.distanceTravelled,
       values.averageConsumption,
     );
+
     const newVehicle: VehicleData = {
       id: '',
       licensePlate: '',
@@ -111,10 +116,17 @@ export const useVehicle = () => {
     return fuelConsumptionByModel;
   }
 
+  const deleteVehicle = (id: string): void => {
+    const filteredVehicles = vehicles.filter((vehicle) => vehicle.id !== id);
+    saveToLocalStorage('@Trucks', filteredVehicles);
+    setVehicles(filteredVehicles);
+  };
+
   return {
     handleEdit,
     createVehicle,
     createChartReadyData,
     calculateAverageConsumptionByModel,
+    deleteVehicle,
   };
 };

@@ -1,5 +1,10 @@
-export { DeleteTooltip } from './DeleteTooltip';
-export { EditModal } from './EditModal';
-export { EditTooltip } from './EditTooltip';
 export { Form } from './Form';
+export { DeleteTooltip } from './DeleteTooltip';
+export { EditTooltip } from './EditTooltip';
+export { EditModal } from './EditModal';
+export { FuelConsumptionChart } from './FuelConsumptionChart';
+export { InfoPopover } from './InfoPopover';
+export { Welcome } from './Welcome';
+export { VehicleRow } from './VehicleRow';
+export { VehicleDetailsDialog } from './VehicleDetailsDialog';
 export { VehicleTable } from './VehicleTable';
