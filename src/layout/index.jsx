@@ -14,7 +14,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CalculateIcon from '@mui/icons-material/CalculateTwoTone';
 import TableIcon from '@mui/icons-material/TableChart';
-import SettingsIcon from '@mui/icons-material/Settings';
 import HomepageIcon from '@mui/icons-material/FireTruckOutlined';
 import AnalyticsIcon from '@mui/icons-material/AnalyticsOutlined';
 import { Link } from 'react-router-dom';

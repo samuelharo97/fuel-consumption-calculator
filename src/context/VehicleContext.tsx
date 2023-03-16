@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext } from 'react';
-import { FuelConsumptionChartData, VehicleData } from '../types';
+import { FuelConsumptionChartData, VehicleData } from '~/types';
 
 type VehicleContextType = {
   vehicles: VehicleData[];

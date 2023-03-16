@@ -19,7 +19,6 @@ interface EditModalProps {
   isOpen: boolean;
   vehicle?: VehicleData;
   handleClose: () => void;
-  onSave?: (vehicle: VehicleData) => void;
 }
 
 export const EditModal: React.FC<EditModalProps> = ({ isOpen, handleClose, vehicle }) => {

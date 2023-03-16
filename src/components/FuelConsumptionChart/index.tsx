@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +9,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { FuelConsumptionChartProps } from '../../types';
-import { useVehicle } from '../../hooks/useVehicle';
-import React from 'react';
+import { useVehicle } from '~/hooks';
+import { FuelConsumptionChartProps } from '~/types';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 

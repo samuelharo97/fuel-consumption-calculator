@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+import { TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
+import { vehicleValidationSchema } from './validations/schema';
 import { FormContainer, SubmitButton, FlexDiv } from './styles';
 import { useFormik } from 'formik';
-import { VehicleData, VehicleFormValues } from '../../types';
-import { TruckBrands } from '../../utils';
-import { useVehicle } from '../../hooks/useVehicle';
-import { vehicleValidationSchema } from './validations/schema';
-import { InfoPopover } from '../InfoPopover';
-import { VehicleDetailsDialog } from '../Dialogue';
-import { VehicleContext } from '~/context/VehicleContext';
+import { VehicleContext } from '~/context';
+import { useVehicle } from '~/hooks';
+import { VehicleFormValues, VehicleData } from '~/types';
+import { TruckBrands } from '~/utils';
+import { InfoPopover, VehicleDetailsDialog } from '~/components';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',
@@ -42,6 +41,14 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
     },
     validationSchema: vehicleValidationSchema,
   });
+
+  const handleNumberInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    const cleanedValue = value.replace(/,/g, '.');
+
+    formik.setFieldValue(name, cleanedValue);
+  };
 
   useEffect(() => {
     if (data != null) {
@@ -120,6 +127,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             ),
             endAdornment: <InputAdornment position="start">litros</InputAdornment>,
           }}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched?.tankCapacity && formik.errors.tankCapacity)}
           helperText={formik.touched.tankCapacity && formik.errors.tankCapacity}
         />
@@ -134,6 +142,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             endAdornment: <InputAdornment position="start">toneladas</InputAdornment>,
           }}
           {...formik.getFieldProps('maxLoad')}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched.maxLoad && formik.errors.maxLoad)}
           helperText={formik.touched.maxLoad && formik.errors.maxLoad}
         />
@@ -145,9 +154,10 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             startAdornment: data ? null : (
               <InfoPopover message="Quanto combustível seu veículo consome por 100 quilômetros em média? Esta informação irá ajudar-nos a estimar o custo do combustível para a sua viagem." />
             ),
-            endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
+            endAdornment: <InputAdornment position="start">L/100km</InputAdornment>,
           }}
           {...formik.getFieldProps('averageConsumption')}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched.averageConsumption && formik.errors.averageConsumption)}
           helperText={formik.touched.averageConsumption && formik.errors.averageConsumption}
         />
@@ -163,6 +173,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             endAdornment: <InputAdornment position="start">km</InputAdornment>,
           }}
           {...formik.getFieldProps('distanceTravelled')}
+          onChange={handleNumberInputChange}
           error={Boolean(formik.touched.distanceTravelled && formik.errors.distanceTravelled)}
           helperText={formik.touched.distanceTravelled && formik.errors.distanceTravelled}
         />
