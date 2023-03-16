@@ -102,28 +102,25 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
           helperText={formik.touched.licensePlate && formik.errors.licensePlate}
         />
-        <Autocomplete
-        id="vehicleModel"
-        options={TruckBrands}
-        freeSolo={true}
-        getOptionLabel={option => option}
-        value={formik.values.vehicleModel}
-        onChange={(event, value) =>
-          formik.setFieldValue('vehicleModel', value || '')
-        }
-        renderInput={params => (
-          <TextField
-            {...params}
-            label="Modelo"
-            error={Boolean(
-              formik.touched.vehicleModel && formik.errors.vehicleModel
-            )}
-            helperText={
-              formik.touched.vehicleModel && formik.errors.vehicleModel
-            }
-          />
-        )}
-      />
+        
+       <Autocomplete
+          id="vehicleModel"
+          options={TruckBrands}
+          freeSolo={true}
+          getOptionLabel={(option) => option}
+          value={formik.values.vehicleModel}
+          onChange={async (_event, value) =>
+            await formik.setFieldValue('vehicleModel', value ?? '')
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Modelo"
+              error={Boolean(formik.touched.vehicleModel && formik.errors.vehicleModel)}
+              helperText={formik.touched.vehicleModel && formik.errors.vehicleModel}
+            />
+          )}
+        />
 
         <TextField
           id="tankCapacity"
