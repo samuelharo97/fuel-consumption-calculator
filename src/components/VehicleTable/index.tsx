@@ -1,9 +1,10 @@
 import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { TableHeaderCell } from './styles';
 import React, { useContext, useState } from 'react';
-import { EditModal, VehicleRow } from '~/components';
+import { AlertDialog, EditModal, VehicleRow } from '~/components';
 import { VehicleData } from '~/types';
 import { VehicleContext } from '~/context';
+import { useVehicle } from '~/hooks';
 
 interface TableProps {
   data: VehicleData[];
@@ -11,24 +12,47 @@ interface TableProps {
 
 export const VehicleTable: React.FC<TableProps> = ({ data }) => {
   const { vehicles } = useContext(VehicleContext);
-  const [open, setOpen] = useState(false);
-  const [editVehicle, setEditVehicle] = useState<VehicleData>();
+  const { deleteVehicle } = useVehicle();
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [clickedVehicle, setClickedVehicle] = useState<VehicleData>();
 
-  const handleOpen = (id: string): void => {
-    const truckToEdit = vehicles.find((vehicle) => vehicle.id === id);
-    if (truckToEdit == null) {
+  const handleOpen = (id: string, argument: string): void => {
+    const clickedTruck = vehicles.find((vehicle) => vehicle.id === id);
+
+    if (clickedTruck == null) {
       throw new Error('Truck not found');
     }
-    setEditVehicle(truckToEdit);
-    setOpen(true);
+
+    setClickedVehicle(clickedTruck);
+
+    if (argument === 'delete') {
+      setOpenDelete(true);
+    } else {
+      setOpenEdit(true);
+    }
   };
+
   const handleClose = (): void => {
-    setOpen(false);
+    setOpenEdit(false);
+    setOpenDelete(false);
   };
 
   return (
     <>
-      <EditModal vehicle={editVehicle} handleClose={handleClose} isOpen={open}></EditModal>;
+      <EditModal vehicle={clickedVehicle} handleClose={handleClose} isOpen={openEdit}></EditModal>;
+      <AlertDialog
+        title="Cuidado."
+        message="Deseja realmente remover este item?"
+        isOpen={openDelete}
+        handleAccept={() => {
+          if (clickedVehicle?.id) {
+            deleteVehicle(clickedVehicle.id);
+            handleClose();
+          }
+        }}
+        handleClose={handleClose}
+      />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -46,7 +70,8 @@ export const VehicleTable: React.FC<TableProps> = ({ data }) => {
             {data.map((vehicle) => (
               <VehicleRow
                 key={vehicle.id}
-                handleOpen={() => handleOpen(vehicle.id)}
+                handleOpen={() => handleOpen(vehicle.id, 'edit')}
+                handleDelete={() => handleOpen(vehicle.id, 'delete')}
                 vehicle={vehicle}
               />
             ))}

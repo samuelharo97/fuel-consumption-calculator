@@ -8,3 +8,4 @@ export { Welcome } from './Welcome';
 export { VehicleRow } from './VehicleRow';
 export { VehicleDetailsDialog } from './VehicleDetailsDialog';
 export { VehicleTable } from './VehicleTable';
+export { AlertDialog } from './AlertDialog';

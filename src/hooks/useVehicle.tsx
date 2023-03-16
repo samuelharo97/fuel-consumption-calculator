@@ -116,7 +116,11 @@ export const useVehicle = () => {
     return fuelConsumptionByModel;
   }
 
-  const deleteVehicle = (id: string): void => {
+  const deleteVehicle = (id: string | undefined): void => {
+    if (!id) {
+      throw new Error('ID is undefined');
+    }
+
     const filteredVehicles = vehicles.filter((vehicle) => vehicle.id !== id);
     saveToLocalStorage('@Trucks', filteredVehicles);
     setVehicles(filteredVehicles);

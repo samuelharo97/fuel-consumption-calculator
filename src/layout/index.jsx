@@ -20,16 +20,19 @@ import { Link } from 'react-router-dom';
 import { clearLocalStorage } from '../utils';
 import { StyledToolbar, AppBar, Drawer, DrawerHeader } from './styles';
 import { VehicleContext } from '../context/VehicleContext';
+import { AlertDialog } from '../components/AlertDialog';
 
 const PageLayout = () => {
   const theme = useTheme();
   const { setVehicles, setChartInfo } = React.useContext(VehicleContext);
   const [open, setOpen] = React.useState(false);
+  const [openAlert, setOpenAlert] = React.useState(false);
 
   const handleClear = () => {
     clearLocalStorage();
     setVehicles([]);
     setChartInfo([]);
+    setOpenAlert(false);
   };
 
   const handleDrawerOpen = () => {
@@ -42,6 +45,13 @@ const PageLayout = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
+      <AlertDialog
+        isOpen={openAlert}
+        title="Cuidado"
+        handleAccept={() => handleClear()}
+        handleClose={() => setOpenAlert(false)}
+        message="Deseja realmente deletar todos os dados?"
+      />
       <AppBar position="fixed" open={open}>
         <StyledToolbar>
           <Box>
@@ -63,7 +73,7 @@ const PageLayout = () => {
           </Box>
 
           <Box className="second">
-            <Typography onClick={() => handleClear()} component="a">
+            <Typography onClick={() => setOpenAlert(true)} component="a">
               Limpar dados
             </Typography>
           </Box>

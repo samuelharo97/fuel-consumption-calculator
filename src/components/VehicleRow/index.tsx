@@ -1,18 +1,16 @@
 import React from 'react';
 import { TableCell } from '@mui/material';
 import { StyledTableRow } from './styles';
-import { useVehicle } from '~/hooks';
 import { VehicleData } from '~/types';
 import { DeleteTooltip, EditTooltip } from '~/components';
 
 interface VehicleRowProps {
   vehicle: VehicleData;
   handleOpen: (id: string) => void;
+  handleDelete: (id: string) => void;
 }
 
-export const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle, handleOpen }) => {
-  const { deleteVehicle } = useVehicle();
-
+export const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle, handleOpen, handleDelete }) => {
   return (
     <>
       <StyledTableRow key={vehicle.id}>
@@ -33,7 +31,7 @@ export const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle, handleOpen }) =
         <TableCell>
           <DeleteTooltip
             removeRow={() => {
-              deleteVehicle(vehicle.id);
+              handleDelete(vehicle.id);
             }}
           />
         </TableCell>
