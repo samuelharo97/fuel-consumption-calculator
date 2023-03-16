@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { FuelConsumptionChartData, VehicleData } from '../types';
 import { VehicleContext } from './VehicleContext';
 import { loadFromLocalStorage, saveToLocalStorage } from '../utils';

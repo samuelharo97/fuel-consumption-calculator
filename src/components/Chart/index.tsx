@@ -10,6 +10,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { FuelConsumptionChartProps } from '../../types';
 import { useVehicle } from '../../hooks/useVehicle';
+import React from 'react';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 

@@ -1,6 +1,6 @@
 import { Button, Popover, Typography, Box } from '@mui/material';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface PopoverProps {
   message: string;

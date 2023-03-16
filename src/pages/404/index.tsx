@@ -6,7 +6,7 @@ export const NotFound = () => {
       <Typography variant="h2" align="center">
         404. page not found.
       </Typography>
-      <img src="/404.png"></img>
+      <img src="/404.png" alt="meme bear indicating 404 not found"></img>
     </>
   );
 };

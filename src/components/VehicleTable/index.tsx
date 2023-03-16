@@ -12,7 +12,7 @@ import { DeleteTooltip } from '../DeleteTooltip';
 import type { VehicleData } from '../../types/vehicle-data.type';
 import { EditTooltip } from '../EditTooltip';
 import { EditModal } from '../EditModal';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { VehicleContext } from '../../context/VehicleContext';
 
 interface TableProps {

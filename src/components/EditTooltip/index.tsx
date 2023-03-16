@@ -1,5 +1,6 @@
-import { Tooltip, IconButton } from "@mui/material";
+import { Tooltip, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import React from 'react';
 
 interface EditProps {
   editRow: () => void;
