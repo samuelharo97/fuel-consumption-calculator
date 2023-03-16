@@ -4,6 +4,10 @@
 
 The Fuel Consumption Calculator is a web application developed using ReactJS and Typescript. It allows users to calculate the average fuel consumption per ton transported for a fleet of trucks. The application uses the MaterialUI 5 library for styling the components and the Formik library for the application form. The app also features a bar chart that calculates average fuel consumption by truck model.
 
+### Deploy
+
+Project is deployed and can be tested at: [Vercel](https://fuel-consumption-calculator.vercel.app/)
+
 ## Installation
 
 To install the fuel consumption calculator, follow the steps below:
@@ -39,15 +43,15 @@ The fuel consumption calculator is developed using the following technologies:
     Formik
     Styled-components
 
-### Notes
+## Notes
 
 During the development of the Fuel Consumption Calculator, I encountered a few challenges that required me to adapt and learn on the go. The two main challenges I faced were:
 
-## Learning MUI on the Go
+### Learning MUI on the Go
 
 Although I had some experience with MaterialUI before starting this project, I had not used version 5 before. Learning the new syntax and components took some time and effort, but I was able to overcome this challenge by reading the documentation and experimenting with the library.
 
-## Package Conflicts
+### Package Conflicts
 
 At the beginning of the project, I used create-react-app to set up the development environment. However, I encountered some package conflicts that made it difficult to add new features to the application. To solve this problem, I switched to Vite, which allowed me to use the latest versions of the packages without conflicts.
 
