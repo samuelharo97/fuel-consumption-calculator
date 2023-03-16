@@ -39,6 +39,20 @@ The fuel consumption calculator is developed using the following technologies:
     Formik
     Styled-components
 
+### Notes
+
+During the development of the Fuel Consumption Calculator, I encountered a few challenges that required me to adapt and learn on the go. The two main challenges I faced were:
+
+## Learning MUI on the Go
+
+Although I had some experience with MaterialUI before starting this project, I had not used version 5 before. Learning the new syntax and components took some time and effort, but I was able to overcome this challenge by reading the documentation and experimenting with the library.
+
+## Package Conflicts
+
+At the beginning of the project, I used create-react-app to set up the development environment. However, I encountered some package conflicts that made it difficult to add new features to the application. To solve this problem, I switched to Vite, which allowed me to use the latest versions of the packages without conflicts.
+
+Despite these challenges, I was able to complete the project on time and deliver a functional application that meets the requirements. I believe that overcoming these challenges has helped me to become a better developer and problem solver.
+
 ## Brandbook Compliance
 
 The Fuel Consumption Calculator follows the Intelbras Brandbook by incorporating the brand's color scheme, typography, and design elements into the application. For example, the application uses the Intelbras green (#00a335) as the primary color and the Nunito font for text. Also, a clean and simple design that is consistent with the brand's style.

@@ -3,13 +3,14 @@ import type { DefaultTheme } from 'styled-components';
 import { Theme } from '@mui/material/styles';
 
 declare module '@mui/system' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
 export const lightTheme: DefaultTheme = createTheme({
   palette: {
     primary: {
-      light: '#87c984',
+      light: '#abd5a2',
       main: '#00A335',
       dark: '#00863F',
     },

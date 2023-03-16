@@ -21,7 +21,7 @@ export const InfoPopover: React.FC<PopoverProps> = ({ message }) => {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <Box sx={{ alignSelf: 'center', transform: 'translate(580%, -0%)' }}>
+    <Box sx={{ alignSelf: 'center', position: 'absolute', transform: 'translate(580%, -0%)' }}>
       <Button onClick={handleClick}>
         <InfoIcon />
       </Button>
