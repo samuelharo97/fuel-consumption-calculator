@@ -77,9 +77,13 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
         handleClose={() => setOpen(false)}
         isOpen={open}
       ></VehicleDetailsDialog>
-      <Typography variant="h2" component="div">
-        Cálculo de combustível.
-      </Typography>
+      
+      {data 
+      ? null 
+      : 
+ <Typography variant="h2" component="div">
+     Cálculo de combustível.
+      </Typography> }  
 
       <FormContainer onSubmit={formik.handleSubmit}>
         <Typography variant="subtitle1" component="div">
