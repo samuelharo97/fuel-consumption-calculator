@@ -60,7 +60,7 @@ export const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
-  marginBottom: '120px',
+  marginBottom: '90px',
 
   ...(open && {
     ...openedMixin(theme),
