@@ -1,36 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { TableCell } from '@mui/material';
 import { StyledTableRow } from './styles';
-import { VehicleContext } from '~/context';
 import { useVehicle } from '~/hooks';
 import { VehicleData } from '~/types';
-import { DeleteTooltip, EditModal, EditTooltip } from '~/components';
+import { DeleteTooltip, EditTooltip } from '~/components';
 
 interface VehicleRowProps {
   vehicle: VehicleData;
+  handleOpen: (id: string) => void;
 }
 
-export const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
-  const [open, setOpen] = useState(false);
-  const [editVehicle, setEditVehicle] = useState<VehicleData>();
-  const { vehicles } = useContext(VehicleContext);
+export const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle, handleOpen }) => {
   const { deleteVehicle } = useVehicle();
-
-  const handleOpen = (id: string): void => {
-    const truckToEdit = vehicles.find((vehicle) => vehicle.id === id);
-    if (truckToEdit == null) {
-      throw new Error('Truck not found');
-    }
-    setEditVehicle(truckToEdit);
-    setOpen(true);
-  };
-  const handleClose = (): void => {
-    setOpen(false);
-  };
 
   return (
     <>
-      <EditModal vehicle={editVehicle} handleClose={handleClose} isOpen={open}></EditModal>
       <StyledTableRow key={vehicle.id}>
         <TableCell>{vehicle.licensePlate}</TableCell>
         <TableCell>{vehicle.vehicleModel}</TableCell>

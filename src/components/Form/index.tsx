@@ -154,7 +154,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
             startAdornment: data ? null : (
               <InfoPopover message="Quanto combustível seu veículo consome por 100 quilômetros em média? Esta informação irá ajudar-nos a estimar o custo do combustível para a sua viagem." />
             ),
-            endAdornment: <InputAdornment position="start">litros/100km</InputAdornment>,
+            endAdornment: <InputAdornment position="start">L/100km</InputAdornment>,
           }}
           {...formik.getFieldProps('averageConsumption')}
           onChange={handleNumberInputChange}
