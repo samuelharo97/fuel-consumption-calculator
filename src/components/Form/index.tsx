@@ -72,11 +72,14 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
 
   return (
     <>
+      { data ? null : 
       <VehicleDetailsDialog
         vehicle={vehicles[vehicles.length - 1]}
         handleClose={() => setOpen(false)}
         isOpen={open}
-      ></VehicleDetailsDialog>
+      /> 
+    }
+      
       
       {data 
       ? null 
