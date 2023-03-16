@@ -45,7 +45,7 @@ export const FuelConsumptionChart: React.FC<FuelConsumptionChartProps> = ({ data
     labels: averageConsumptionsByModel.map((item) => item.vehicleModel),
     datasets: [
       {
-        label: 'Consumo de combustível por modelo',
+        label: 'Consumo de combustível por modelo em L/t-km',
         data: averageConsumptionsByModel.map((item) => item.averageConsumption),
         backgroundColor: 'rgba(135, 201, 132, 0.4)',
         borderColor: '#00863F',

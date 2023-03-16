@@ -16,7 +16,7 @@ export const vehicleValidationSchema = Yup.object().shape({
   maxLoad: Yup.number()
     .required('Carga máxima é obrigatório.')
     .min(0.1, 'Carga máxima deve ser maior que 0 toneladas.')
-    .max(50, 'Carga máxima não pode exceder 50 toneladas'),
+    .max(200, 'Carga máxima não pode exceder 200 toneladas'),
 
   averageConsumption: Yup.number()
     .required('Consumo médio é obrigatório.')

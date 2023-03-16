@@ -1,5 +1,5 @@
 import { TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FormContainer, SubmitButton, FlexDiv } from './styles';
 import { useFormik } from 'formik';
 import { VehicleData, VehicleFormValues } from '../../types';
@@ -7,6 +7,8 @@ import { TruckBrands } from '../../utils';
 import { useVehicle } from '../../hooks/useVehicle';
 import { vehicleValidationSchema } from './validations/schema';
 import { InfoPopover } from '../InfoPopover';
+import { VehicleDetailsDialog } from '../Dialogue';
+import { VehicleContext } from '~/context/VehicleContext';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',
@@ -22,7 +24,10 @@ interface FormOptionalProps {
 }
 
 export const Form: React.FC<FormOptionalProps> = ({ data }) => {
+  const { vehicles } = useContext(VehicleContext);
+
   const { handleEdit, createVehicle } = useVehicle();
+  const [open, setOpen] = useState(false);
 
   const formik = useFormik({
     initialValues,
@@ -32,6 +37,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
       } else {
         handleEdit(values, data.id);
       }
+      setOpen(true);
     },
     validationSchema: vehicleValidationSchema,
   });
@@ -58,6 +64,11 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
 
   return (
     <>
+      <VehicleDetailsDialog
+        vehicle={vehicles[vehicles.length - 1]}
+        handleClose={() => setOpen(false)}
+        isOpen={open}
+      ></VehicleDetailsDialog>
       <Typography variant="h2" component="div">
         Cálculo de combustível.
       </Typography>

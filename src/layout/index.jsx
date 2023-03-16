@@ -65,7 +65,7 @@ const PageLayout = () => {
 
           <Box className="second">
             <Typography onClick={() => handleClear()} component="a">
-              Clear Trucks
+              Limpar dados
             </Typography>
           </Box>
         </StyledToolbar>
@@ -169,31 +169,7 @@ const PageLayout = () => {
             </ListItemButton>
           </ListItem>
         </List>
-
         <Divider />
-
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: 'end',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'end',
-                }}
-              >
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Settings" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        </List>
       </Drawer>
     </Box>
   );

@@ -60,11 +60,11 @@ export const VehicleTable: React.FC<TableProps> = ({ data, handleDeleteTruck }) 
               <StyledTableRow key={vehicle.id}>
                 <TableCell>{vehicle.licensePlate}</TableCell>
                 <TableCell>{vehicle.vehicleModel}</TableCell>
-                <TableCell>{vehicle.tankCapacity}</TableCell>
-                <TableCell>{vehicle.maxLoad}</TableCell>
-                <TableCell>{vehicle.averageConsumption}</TableCell>
-                <TableCell>{vehicle.distanceTravelled}</TableCell>
-                <TableCell>{vehicle.totalConsumption}</TableCell>
+                <TableCell>{vehicle.tankCapacity} L</TableCell>
+                <TableCell>{vehicle.maxLoad} t</TableCell>
+                <TableCell>{vehicle.averageConsumption} L/100km</TableCell>
+                <TableCell>{vehicle.distanceTravelled} km</TableCell>
+                <TableCell>{vehicle.totalConsumption} L/t-km</TableCell>
                 <TableCell>
                   <EditTooltip
                     editRow={() => {
