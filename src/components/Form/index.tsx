@@ -112,7 +112,7 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           freeSolo={true}
           getOptionLabel={(option) => option}
           value={formik.values.vehicleModel}
-          onChange={async (_event, value) =>
+          onInputChange={async (_event, value) =>
             await formik.setFieldValue('vehicleModel', value ?? '')
           }
           renderInput={(params) => (
