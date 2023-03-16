@@ -12,9 +12,9 @@ Project is deployed and can be tested at: [Vercel](https://fuel-consumption-calc
 
 To install the fuel consumption calculator, follow the steps below:
 
-    Clone the repository from GitHub.
-    Install the required dependencies using npm install.
-    Start the development server using npm run dev.
+   - Clone the repository from GitHub.
+   - Install the required dependencies using `npm install`.
+   - Start the development server using `npm run dev`.
 
 ## Usage
 
@@ -24,24 +24,24 @@ Once the development server is running, you can access the application in your w
 
 The fuel consumption calculator application has the following features:
 
-    A user-friendly form for entering vehicle information.
-    Real-time calculations of the average fuel consumption per ton transported.
-    Displays the average fuel consumption by truck model in a bar chart.
-    Stores previously calculations in a table.
-    Updates automatically every time a new calculation is made.
-    Uses the react-chartjs-2 library to create the chart.
-    Validation of form input using Formik.
-    MaterialUI 5 styling that adheres to the Intelbras Brandbook guidelines.
+   - A user-friendly form for entering vehicle information.
+   - Real-time calculations of the average fuel consumption per ton transported.
+   - Displays the average fuel consumption by truck model in a bar chart.
+   - Stores previously calculations in a table.
+   - Updates automatically every time a new calculation is made.
+   - Uses the react-chartjs-2 library to create the chart.
+   - Validation of form input using Formik.
+   - MaterialUI 5 styling that adheres to the Intelbras Brandbook guidelines.
 
 ## Technologies Used
 
 The fuel consumption calculator is developed using the following technologies:
 
-    ReactJS
-    Typescript
-    MaterialUI 5
-    Formik
-    Styled-components
+   - ReactJS
+   - Typescript
+   - MaterialUI 5
+   - Formik
+   - Styled-components
 
 ## Notes
 
