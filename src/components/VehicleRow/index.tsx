@@ -1,12 +1,10 @@
-import { TableCell } from '@mui/material';
-import { DeleteTooltip } from '../DeleteTooltip';
-import { EditTooltip } from '../EditTooltip';
-import { StyledTableRow } from '../VehicleTable/styles';
-import { VehicleData } from '~/types';
 import React, { useState, useContext } from 'react';
-import { VehicleContext } from '~/context/VehicleContext';
-import { EditModal } from '../EditModal';
-import { useVehicle } from '~/hooks/useVehicle';
+import { TableCell } from '@mui/material';
+import { StyledTableRow } from './styles';
+import { VehicleContext } from '~/context';
+import { useVehicle } from '~/hooks';
+import { VehicleData } from '~/types';
+import { DeleteTooltip, EditModal, EditTooltip } from '~/components';
 
 interface VehicleRowProps {
   vehicle: VehicleData;

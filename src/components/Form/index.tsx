@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+import { TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
+import { vehicleValidationSchema } from './validations/schema';
 import { FormContainer, SubmitButton, FlexDiv } from './styles';
 import { useFormik } from 'formik';
-import { VehicleData, VehicleFormValues } from '../../types';
-import { TruckBrands } from '../../utils';
-import { useVehicle } from '../../hooks/useVehicle';
-import { vehicleValidationSchema } from './validations/schema';
-import { InfoPopover } from '../InfoPopover';
-import { VehicleDetailsDialog } from '../VehicleDetailsDialog';
-import { VehicleContext } from '~/context/VehicleContext';
+import { VehicleContext } from '~/context';
+import { useVehicle } from '~/hooks';
+import { VehicleFormValues, VehicleData } from '~/types';
+import { TruckBrands } from '~/utils';
+import { InfoPopover, VehicleDetailsDialog } from '~/components';
 
 const initialValues: VehicleFormValues = {
   licensePlate: '',

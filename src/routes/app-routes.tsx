@@ -1,9 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { CalculateForm } from '../pages/CalculateForm';
-import { Table } from '../pages/Table';
-import { Analytics } from '../pages/Analytics';
-import { Home } from '../pages/Home';
-import { NotFound } from '../pages/404';
+import { CalculateForm, NotFound, Analytics, Home, Table } from '~/pages';
 
 export const AppRoutes = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material';
-import { GlobalTheme, lightTheme } from '../themes';
+import { GlobalTheme, lightTheme } from '~/themes';
 import { BrowserRouter } from 'react-router-dom';
-import { VehicleProvider } from '../context/VehicleProvider';
+import { VehicleProvider } from '~/context';
 
 type Props = {
   children: React.ReactNode;

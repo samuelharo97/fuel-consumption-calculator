@@ -1,8 +1,8 @@
 import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { TableHeaderCell } from './styles';
-import type { VehicleData } from '../../types/vehicle-data.type';
 import React from 'react';
-import { VehicleRow } from '../VehicleRow';
+import { VehicleRow } from '~/components';
+import { VehicleData } from '~/types';
 
 interface TableProps {
   data: VehicleData[];
