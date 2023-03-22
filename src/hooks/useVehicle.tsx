@@ -13,7 +13,7 @@ export const useVehicle = () => {
   const { setVehicles, vehicles } = useContext(VehicleContext);
 
   const createVehicle = (values: VehicleFormValues): void => {
-    const totalConsumption = calculateTotal(
+    const totalConsumption = calculateTotalFuelConsumption(
       values.maxLoad,
       values.distanceTravelled,
       values.averageConsumption,
@@ -28,14 +28,18 @@ export const useVehicle = () => {
     setVehicles([...vehicles, newVehicle]);
   };
 
-  const calculateTotal = (
-    truckLoad: number,
-    distanceTravelled: number,
-    averageConsumption: number,
+  const calculateTotalFuelConsumption = (
+    maxWeightInTons: number,
+    distanceInKm: number,
+    consumptionPer100km: number,
   ): number => {
-    const averageWeight = truckLoad / (distanceTravelled * 0.001);
+    const consumptionPerKm = consumptionPer100km / 100;
 
-    return Number(((averageConsumption * 1000) / (averageWeight * 1000)).toFixed(3));
+    const averageWeightPerKm = maxWeightInTons / (distanceInKm * 0.001);
+
+    const averageConsumptionPerTons = (consumptionPerKm * 1000) / (averageWeightPerKm * 1000);
+
+    return Number(averageConsumptionPerTons.toFixed(3));
   };
 
   const createChartReadyData = (vehicleData: VehicleData[]): FuelConsumptionChartData[] => {
@@ -48,7 +52,7 @@ export const useVehicle = () => {
   const handleEdit = (values: VehicleFormValues, id: string): void => {
     const updatedData = vehicles.map((data) => {
       if (data.id === id) {
-        const totalConsumption = calculateTotal(
+        const totalConsumption = calculateTotalFuelConsumption(
           values.maxLoad,
           values.distanceTravelled,
           values.averageConsumption,
