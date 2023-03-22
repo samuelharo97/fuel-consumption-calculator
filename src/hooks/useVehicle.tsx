@@ -20,24 +20,11 @@ export const useVehicle = () => {
     );
 
     const newVehicle: VehicleData = {
-      id: '',
-      licensePlate: '',
-      vehicleModel: '',
-      tankCapacity: 0,
-      maxLoad: 0,
-      averageConsumption: 0,
-      distanceTravelled: 0,
-      totalConsumption: 0,
+      ...values,
+      id: uuidv4(),
+      totalConsumption: totalConsumption,
     };
 
-    newVehicle.id = uuidv4();
-    newVehicle.averageConsumption = values.averageConsumption;
-    newVehicle.distanceTravelled = values.distanceTravelled;
-    newVehicle.licensePlate = values.licensePlate;
-    newVehicle.maxLoad = values.maxLoad;
-    newVehicle.tankCapacity = values.tankCapacity;
-    newVehicle.vehicleModel = values.vehicleModel;
-    newVehicle.totalConsumption = totalConsumption;
     setVehicles([...vehicles, newVehicle]);
   };
 

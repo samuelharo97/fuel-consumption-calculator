@@ -72,21 +72,19 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
 
   return (
     <>
-      { data ? null : 
-      <VehicleDetailsDialog
-        vehicle={vehicles[vehicles.length - 1]}
-        handleClose={() => setOpen(false)}
-        isOpen={open}
-      /> 
-    }
-      
-      
-      {data 
-      ? null 
-      : 
- <Typography variant="h2" component="div">
-     Cálculo de combustível.
-      </Typography> }  
+      {data ? null : (
+        <VehicleDetailsDialog
+          vehicle={vehicles[vehicles.length - 1]}
+          handleClose={() => setOpen(false)}
+          isOpen={open}
+        />
+      )}
+
+      {data ? null : (
+        <Typography variant="h2" component="div">
+          Cálculo de combustível.
+        </Typography>
+      )}
 
       <FormContainer onSubmit={formik.handleSubmit}>
         <Typography variant="subtitle1" component="div">
@@ -105,8 +103,8 @@ export const Form: React.FC<FormOptionalProps> = ({ data }) => {
           error={Boolean(formik.touched.licensePlate && formik.errors.licensePlate)}
           helperText={formik.touched.licensePlate && formik.errors.licensePlate}
         />
-        
-       <Autocomplete
+
+        <Autocomplete
           id="vehicleModel"
           options={TruckBrands}
           freeSolo={true}

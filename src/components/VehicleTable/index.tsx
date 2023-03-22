@@ -40,7 +40,7 @@ export const VehicleTable: React.FC<TableProps> = ({ data }) => {
 
   return (
     <>
-      <EditModal vehicle={clickedVehicle} handleClose={handleClose} isOpen={openEdit}></EditModal>;
+      <EditModal vehicle={clickedVehicle} handleClose={handleClose} isOpen={openEdit}></EditModal>
       <AlertDialog
         title="Cuidado."
         message="Deseja realmente remover este item?"
